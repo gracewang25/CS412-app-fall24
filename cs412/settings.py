@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['cs-412-assignment3-theta.vercel.app',
                  '127.0.0.1',
-                 ]
+                 "cs-412-assignment3-p624638cv-graces-projects-168ac535.vercel.app",
+]
 
 
 # Application definition
@@ -51,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    
 ]
 
 ROOT_URLCONF = 'cs412.urls'
