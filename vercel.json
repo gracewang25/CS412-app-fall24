@@ -20,12 +20,6 @@
         "src": "/(.*)",
         "dest": "cs412/wsgi.py"
       }
-    ],
-    "env": {
-      "DJANGO_SETTINGS_MODULE": "cs412.settings",
-      "SECRET_KEY": "@your-secret-key",
-      "DEBUG": "False",
-      "DATABASE_URL": "@your-database-url"
-    }
+    ]
   }
   
