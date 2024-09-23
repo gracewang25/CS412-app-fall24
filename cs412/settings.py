@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-vph6k6dsl#q%7w76f1fj^_@=(n_v26gbri5-t(ub62)ep#2n7z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cs-412-assignment3-theta.vercel.app']
+ALLOWED_HOSTS = ['cs-412-assignment3-theta.vercel.app',
+                 '127.0.0.1',
+                 ]
 
 
 # Application definition
@@ -49,6 +51,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'cs412.urls'
