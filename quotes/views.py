@@ -21,7 +21,7 @@ IMAGES = [
 
 # Index Page
 def home(request):
-    template_name = "quote/home.html"
+    template_name = "quotes/home.html"
 
     selected_quote = random.choice(QUOTES)
     selected_image = random.choice(IMAGES)
@@ -37,7 +37,7 @@ def home(request):
 # Quotes Page
 
 def quote(request):
-    template_name = "quote/quote.html"
+    template_name = "quotes/quote.html"
 
     selected_quote = random.choice(QUOTES)
     selected_image = random.choice(IMAGES)
@@ -58,7 +58,7 @@ def show_all(request):
         'person': "Uchiha Sasuke"
     }
 
-    return render(request, 'quote/show_all.html', context)
+    return render(request, 'quotes/show_all.html', context)
 
 # About Page
 def about(request):
