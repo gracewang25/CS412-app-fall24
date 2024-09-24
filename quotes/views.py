@@ -76,4 +76,4 @@ def about(request):
         'creator_info': creator_info
     }
     
-    return render(request, 'quote/about.html', context)
+    return render(request, 'quotes/about.html', context)
