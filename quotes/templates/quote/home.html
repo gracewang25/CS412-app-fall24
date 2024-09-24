@@ -6,7 +6,7 @@
 
 {% block content %}
 <h1>{{ person }}</h1>
-<img src="{% static 'images/' %}{{ image }}" alt="{{ person }}" width="80%">
+<img src="{{ image }}" alt="{{ person }}" width="80%">
 <p>{{ quote }}</p>
 {% endblock %}
 

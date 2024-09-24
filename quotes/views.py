@@ -13,10 +13,10 @@ QUOTES = [
 ]
 
 IMAGES = [
-    "image1.png",
-    "image2.png",
-    "image3.png",
-    "image4.png"
+    "https://cs-people.bu.edu/grace25/quotes_images/image1.png",
+    "https://cs-people.bu.edu/grace25/quotes_images/image2.png",
+    "https://cs-people.bu.edu/grace25/quotes_images/image3.png",
+    "https://cs-people.bu.edu/grace25/quotes_images/image4.png"
 ]
 
 # Index Page

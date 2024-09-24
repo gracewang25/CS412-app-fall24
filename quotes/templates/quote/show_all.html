@@ -20,7 +20,7 @@
     <ul class="images-list">
         {% for image in images %}
             <li>
-                <img src="{% static 'images/' %}{{ image }}" alt="{{ person }}">
+                <img src="{{ image }}" alt="{{ person }}" width="80%">
             </li>
         {% endfor %}
     </ul>
