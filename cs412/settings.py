@@ -42,8 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hw', #in-class example
-    'quotes', 
+    'quotes', # a3
     'formdata', #in-class example
+    'restaurant', # a4
 ]
 
 MIDDLEWARE = [

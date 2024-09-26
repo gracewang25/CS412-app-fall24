@@ -22,6 +22,9 @@ urlpatterns = [
     path('hw/', include("hw.urls")), # in-class ex
     # Assignment 3
     path('', include('quotes.urls')),
-    path('formdata/', include('formdata.urls'))
+    path('formdata/', include('formdata.urls')),
+    # Assignment 4
+    path('restaurant/', include('restaurant.urls')),
+
  
 ]
