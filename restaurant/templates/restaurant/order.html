@@ -1,0 +1,50 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% block title %}Order{% endblock %}
+
+{% block content %}
+    <h1>Order Now</h1>
+    <form method="post" action="{% url 'confirmation' %}">
+        {% csrf_token %}
+        
+        <h2>Menu</h2>
+        <div class="menu-item-container">
+        <ul>
+            {% for item in menu_items %}
+                <li class="menu-item">
+                    <input type="checkbox" name="items" value="{{ item.name }}|{{ item.price }}"> <!-- Checkbox with item name and price -->
+                    <a href="{{ item.image }}" target="_blank">
+                        <img src="{{ item.image }}" alt="{{ item.name }}" width="100" height="100">
+                    </a>
+                    <strong>{{ item.name }}</strong> - ${{ item.price }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <h2>Today's Special: {{ daily_special }}</h2>
+    <label>
+        <input type="checkbox" name="items" value="{{ daily_special }}|{{ daily_special_price }}"> <!-- Checkbox for special -->
+        <a href="{{ daily_special_image }}" target="_blank">
+            <img src="{{ daily_special_image }}" alt="{{ daily_special }}" width="100" height="100">
+        </a>
+        <p>Price: ${{ daily_special_price }}</p>
+    </label>
+
+    <h3>Customer Info</h3>
+    <label for="name">Name:</label>
+    <input type="text" name="name" required><br>
+
+    <label for="phone">Phone:</label>
+    <input type="text" name="phone" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" required><br>
+
+    <label for="instructions">Special Instructions:</label>
+    <textarea name="instructions"></textarea><br>
+
+    <button type="submit">Place Order</button>
+    </form>
+    <div class="padding"></div>
+{% endblock %}

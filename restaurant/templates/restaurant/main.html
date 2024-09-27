@@ -1,0 +1,19 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% block title %}Welcome to the Cat Café{% endblock %}
+
+{% block content %}
+    <h1>Welcome to the Cat Café!</h1>
+    <p>Here are some of our popular menu items:</p>
+
+    <div class="featured-items">
+        {% for item in featured_items %}
+            <div class="menu-item">
+                <a href="{{ item.image }}" target="_blank">
+                    <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150">
+                </a>
+                <p><strong>{{ item.name }}</strong> - ${{ item.price }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
