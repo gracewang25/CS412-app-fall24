@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['cs-412-assignment3-theta.vercel.app',
                  '127.0.0.1',
-                 "cs-412-assignment3-p624638cv-graces-projects-168ac535.vercel.app",
+                 'cs-412-assignment3-p624638cv-graces-projects-168ac535.vercel.app',
                 'cs-412-assignment3-677xzednb-graces-projects-168ac535.vercel.app',
 
 ]
