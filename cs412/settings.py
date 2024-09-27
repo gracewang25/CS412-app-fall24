@@ -33,7 +33,8 @@ ALLOWED_HOSTS = ['cs-412-assignment3-theta.vercel.app',
 
 ]
 
-
+TIME_ZONE = 'America/New_York'
+USE_TZ = True
 # Application definition
 
 INSTALLED_APPS = [

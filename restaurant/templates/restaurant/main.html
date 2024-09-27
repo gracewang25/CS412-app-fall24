@@ -9,7 +9,7 @@
     <div class="featured-items">
         {% for item in featured_items %}
             <div class="menu-item">
-                <a href="{{ item.image }}" target="_blank">
+                <a href="{% url 'order' %}" target="_blank">
                     <img src="{{ item.image }}" alt="{{ item.name }}" width="150" height="150">
                 </a>
                 <p><strong>{{ item.name }}</strong> - ${{ item.price }}</p>

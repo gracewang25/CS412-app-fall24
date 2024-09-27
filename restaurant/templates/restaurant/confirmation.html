@@ -5,10 +5,14 @@
 {% block content %}
     <h1>Order Confirmation</h1>
     <p>Thank you, {{ customer_name }}. Your order has been placed.</p>
+    
     <p><strong>Items ordered:</strong></p>
     <ul>
         {% for item in selected_items %}
-            <li>{{ item }}</li>
+            <li>
+                <img src="{{ item.image }}" alt="{{ item.name }}" width="100" height="100">
+                <strong>{{ item.name }}</strong> - ${{ item.price }}
+            </li>
         {% endfor %}
     </ul>
 
