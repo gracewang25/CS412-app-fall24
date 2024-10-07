@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'mini_fb/base.html' %}
 
 {% block title %}
     All Profiles
@@ -6,24 +6,18 @@
 
 {% block content %}
     <h2>All User Profiles</h2>
-    <table border="1">
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>City</th>
-            <th>Profile Image</th>
-        </tr>
+    <div class="profile-grid">
         {% for profile in profiles %}
-        <tr>
-            <td>{{ profile.first_name }}</td>
-            <td>{{ profile.last_name }}</td>
-            <td>{{ profile.city }}</td>
-            <td><img src="{{ profile.profile_image_url }}" alt="Profile image of {{ profile.first_name }}" width="100px"></td>
-        </tr>
+        <div class="profile-card">
+            <img src="{{ profile.profile_image_url }}" alt="Profile image of {{ profile.first_name }}" class="profile-image">
+            <div class="profile-info">
+                <h3>{{ profile.first_name }} {{ profile.last_name }}</h3>
+                <p>City: {{ profile.city }}</p>
+                <p>Email: {{ profile.email_address}}</p>
+            </div>
+        </div>
         {% empty %}
-        <tr>
-            <td colspan="4">No profiles found</td>
-        </tr>
+        <p>No profiles available.</p>
         {% endfor %}
-    </table>
+    </div>
 {% endblock %}
