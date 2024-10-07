@@ -25,6 +25,8 @@ urlpatterns = [
     path('formdata/', include('formdata.urls')),
     # Assignment 4
     path('restaurant/', include('restaurant.urls')),
+    # Assignment 5
+    path('restaurant/', include('restaurant.urls')),
 
  
 ]

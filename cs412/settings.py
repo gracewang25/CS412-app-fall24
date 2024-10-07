@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'quotes', # a3
     'formdata', #in-class example
     'restaurant', # a4
+    'mini_fb' # a5
 ]
 
 MIDDLEWARE = [
