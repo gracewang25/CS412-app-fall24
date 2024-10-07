@@ -26,7 +26,7 @@ urlpatterns = [
     # Assignment 4
     path('restaurant/', include('restaurant.urls')),
     # Assignment 5
-    path('restaurant/', include('restaurant.urls')),
+    path('mini_fb/', include('mini_fb.urls')),
 
  
 ]
