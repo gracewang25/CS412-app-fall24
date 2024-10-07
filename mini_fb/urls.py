@@ -1,5 +1,8 @@
-## mini_fb/urls.py
-## description: the app-specific URLS for the mini_fb application
+# File: mini_fb/urls.py
+# Author: Grace Wang (grace25@bu.edu), 10/7/2024
+# Description: This file defines URL patterns for the mini Facebook application. 
+
+
 
 from django.urls import path
 from django.conf import settings

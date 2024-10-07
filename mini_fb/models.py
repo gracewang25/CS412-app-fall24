@@ -1,3 +1,8 @@
+# File: mini_fb/models.py
+# Author: Grace Wang (grace25@bu.edu), 10/7/2024
+# Description: This file defines the Profile model, representing Facebook 
+# user profile data including first name, last name, city, email, and profile image URL.
+
 from django.db import models
 
 # Create your models here.

@@ -1,3 +1,10 @@
+/* 
+File: mini_fb_styles.css
+Author: Grace Wang (grace25@bu.edu), 10/7/2024
+Description: This file contains the CSS styles for the mini Facebook application. 
+It styles the grid layout, profile cards, and adds a color scheme.
+*/
+
 /* General styles */
 body {
     font-family: 'Arial', sans-serif;
