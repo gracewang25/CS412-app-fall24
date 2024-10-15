@@ -1,14 +1,13 @@
 <!-- 
 File: mini_fb/create_profile_form.html
 Author: Grace Wang (grace25@bu.edu), 10/7/2024
-Description: This file serves as the base template for the mini Facebook application.
-It includes the header, footer, and a content block for all templates to extend.
+Description: This file contains the form to create a new profile.
 -->
 
 {% extends 'mini_fb/base.html' %}
 {% block content %}
-<h2>Create New Profile</h2>
-<form method="POST" enctype="multipart/form-data">
+<h2 style="text-align:center; color:#FF1493;">Create New Profile</h2>
+<form method="POST" enctype="multipart/form-data" style="max-width: 500px; margin: 0 auto;">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Create Profile</button>

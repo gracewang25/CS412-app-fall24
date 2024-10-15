@@ -1,8 +1,7 @@
 /* 
 File: mini_fb_styles.css
 Author: Grace Wang (grace25@bu.edu), 10/7/2024
-Description: This file contains the CSS styles for the mini Facebook application. 
-It styles the grid layout, profile cards, and adds a color scheme.
+Description: This file contains the CSS styles for the mini Facebook application.
 */
 
 /* General styles */
@@ -16,11 +15,11 @@ body {
 
 #padding {
     padding: 100px;
-
 }
+
 /* Header styles */
 header {
-    background-color: #007BFF;
+    background-color: #FF1493; 
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -32,12 +31,6 @@ header h1 {
 }
 
 /* Navigation styles */
-
-ul {
-    list-style-type: none;
-
-}
-
 nav ul {
     list-style-type: none;
     padding: 0;
@@ -55,7 +48,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #007bff;
+    color: #fff; 
 }
 
 /* Profile Grid and Card Styles */
@@ -75,18 +68,24 @@ nav ul li a:hover {
     display: flex;
     align-items: center;
     width: 300px;
+    background-color: #fff;
 }
 
 .profile-card:hover {
-    transform: scale(1.05); /* Slight zoom on hover */
+    transform: scale(1.05);
     box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.profile-card-large {
+    width: 400px; 
+    padding: 20px;
 }
 
 /* Profile Image Styles */
 .profile-image, .profile-image-large {
-    object-fit: cover; /* Ensure image fits inside the circle */
-    border-radius: 50%; /* Circular image */
-    border: 2px solid #ccc;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #FF1493; 
 }
 
 .profile-image {
@@ -97,18 +96,19 @@ nav ul li a:hover {
 .profile-image-large {
     width: 150px;
     height: 150px;
-    margin-bottom: 20px; /* Add space below the image */
+    margin-bottom: 20px;
 }
 
 /* Profile Info Styles */
 .profile-info {
-    margin-left: 15px; /* Add space between the image and details */
+    margin-left: 15px;
+    text-align: center;
 }
 
 .profile-info h3 {
-    margin: 0 0 15px 0; 
+    margin: 0 0 15px 0;
     font-size: 1.6em;
-    color: #007BFF;
+    color: #FF1493;
 }
 
 .profile-info p {
@@ -116,9 +116,40 @@ nav ul li a:hover {
     color: #555;
 }
 
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+button {
+    background-color: #FF1493;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e01280;
+}
+
+input, textarea, select {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 /* Footer styles */
 footer {
-    background-color: #007BFF;
+    background-color: #FF1493;
     color: #fff;
     text-align: center;
     padding: 10px 0;
