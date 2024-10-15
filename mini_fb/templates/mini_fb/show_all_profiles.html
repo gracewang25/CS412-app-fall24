@@ -12,18 +12,22 @@ using data from the Profile model.
 {% endblock %}
 
 {% block content %}
+
     <div class="profile-grid">
         {% for profile in profiles %}
-        <div class="profile-card">
-            <img src="{{ profile.profile_image_url }}" alt="Profile image of {{ profile.first_name }}" class="profile-image">
-            <div class="profile-info">
-                <h3>{{ profile.first_name }} {{ profile.last_name }}</h3>
-                <p>City: {{ profile.city }}</p>
-                <p>Email: {{ profile.email_address}}</p>
+        <a href="{% url 'show_profile' profile.pk %}" class="profile-link">
+            <div class="profile-card">
+                <img src="{{ profile.profile_image_url }}" alt="Profile image of {{ profile.first_name }}" class="profile-image">
+                <div class="profile-info">
+                    <h3>{{ profile.first_name }} {{ profile.last_name }}</h3>
+                    <p>City: {{ profile.city }}</p>
+                    <p>Email: {{ profile.email_address }}</p>
+                </div>
             </div>
-        </div>
+        </a>
         {% empty %}
         <p>No profiles available.</p>
         {% endfor %}
     </div>
+    
 {% endblock %}

@@ -1,0 +1,23 @@
+<!--  blog/templates/blogs/ -->
+
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<h2>Add a Comment to {{article}}</h2>
+
+<form method="POST">
+    <!-- display the form (context variable)] -->
+    <!-- {{form}} -->
+
+    <table>
+        {{form.as_table}}
+    </table>
+    <input type="submit" name="Comment">
+    
+    <form action="">
+        <input type="submit" name="Cancel">
+    </form>
+    {% csrf_token %}
+</form>
+
+{% endblock %}

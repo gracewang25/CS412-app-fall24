@@ -19,7 +19,11 @@ It includes the header, footer, and a content block for all templates to extend.
     <header>
         <h1>Mini FB</h1>
         <nav>
-            
+            <ul>
+                <li><a href="{% url 'show_all_profiles' %}">All Profiles</a></li>
+                <li><a href="{% url 'create_profile' %}">Create Profile</a></li>
+
+            </ul>
         </nav>
     </header>
 
@@ -32,5 +36,6 @@ It includes the header, footer, and a content block for all templates to extend.
     <footer>
         <p>&copy; 2024 Mini FB</p>
     </footer>
+    <div id="padding"></div>
 </body>
 </html>

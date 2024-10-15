@@ -1,0 +1,17 @@
+<!-- 
+File: mini_fb/create_status_form.html
+Author: Grace Wang (grace25@bu.edu), 10/7/2024
+Description: This file serves as the base template for the mini Facebook application.
+It includes the header, footer, and a content block for all templates to extend.
+-->
+
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<h2>Post a Status</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Post Status</button>
+</form>
+{% endblock %}

@@ -1,0 +1,33 @@
+<!-- 
+File: mini_fb/show_profile.html
+Author: Grace Wang (grace25@bu.edu), 10/7/2024
+Description: This file extends the base template and displays a single user's profile.
+-->
+
+{% extends 'mini_fb/base.html' %}
+
+{% block title %}
+    {{ object.first_name }}'s Profile
+{% endblock %}
+
+{% block content %}
+    <div class="profile-card">
+        <img src="{{ object.profile_image_url }}" alt="Profile image of {{ object.first_name }}" class="profile-image-large">
+        <div class="profile-info">
+            <h3>{{ object.first_name }} {{ object.last_name }}</h3>
+            <p>City: {{ object.city }}</p>
+            <p>Email: {{ object.email_address }}</p>
+        </div>
+    </div>
+
+    <h2>Status Messages</h2>
+    <ul>
+        {% for status in object.get_status_messages %}
+        <li>{{ status.timestamp }}: {{ status.message }}</li>
+        {% empty %}
+        <li>No status messages yet.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create_status' object.pk %}">Post a new status</a>
+
+{% endblock %}
