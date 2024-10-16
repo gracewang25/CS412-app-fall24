@@ -19,7 +19,7 @@ body {
 
 /* Header styles */
 header {
-    background-color: #FF1493; 
+    background-color: #C71585; /* Muted neutral dark pink */
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -85,7 +85,7 @@ nav ul li a:hover {
 .profile-image, .profile-image-large {
     object-fit: cover;
     border-radius: 50%;
-    border: 2px solid #FF1493; 
+    border: 2px solid #C71585; /* Muted neutral dark pink */
 }
 
 .profile-image {
@@ -108,7 +108,7 @@ nav ul li a:hover {
 .profile-info h3 {
     margin: 0 0 15px 0;
     font-size: 1.6em;
-    color: #FF1493;
+    color: #C71585; /* Muted neutral dark pink */
 }
 
 .profile-info p {
@@ -125,7 +125,7 @@ form {
 }
 
 button {
-    background-color: #FF1493;
+    background-color: #c71568; /* Muted neutral dark pink */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -135,7 +135,7 @@ button {
 }
 
 button:hover {
-    background-color: #e01280;
+    background-color: #a3136d; 
 }
 
 input, textarea, select {
@@ -149,7 +149,7 @@ input, textarea, select {
 
 /* Footer styles */
 footer {
-    background-color: #FF1493;
+    background-color: #C71585; 
     color: #fff;
     text-align: center;
     padding: 10px 0;
