@@ -101,16 +101,6 @@ DATABASES = {
     }
 }
 
-# import dj_database_url
-
-# DATABASES = {
-#     'default': dj_database_url.config(default='postgres://localhost')
-# }
-
-# DATABASES = {
-#     'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
-# }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -141,6 +131,9 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+TIME_ZONE = 'America/New_York'  
+
 
 
 # Static files (CSS, JavaScript, Images)
