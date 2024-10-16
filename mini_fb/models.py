@@ -4,6 +4,8 @@
 # user profile data including first name, last name, city, email, and profile image URL.
 
 from django.db import models
+from django.utils import timezone
+import pytz
 
 # Create your models here.
 class Profile(models.Model):
@@ -23,7 +25,13 @@ class Profile(models.Model):
         return f"{self.first_name} {self.last_name}"
     
     def get_status_messages(self):
-        return self.status_messages.order_by('-timestamp')
+        # Convert timestamps to EST (Eastern Standard Time)
+        est_tz = pytz.timezone('America/New_York')
+        status_messages = self.status_messages.order_by('-timestamp')
+        for status in status_messages:
+            status.timestamp = status.timestamp.astimezone(est_tz)
+        return status_messages
+
 
     
 class StatusMessage(models.Model):
