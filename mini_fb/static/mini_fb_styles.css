@@ -93,6 +93,18 @@ nav ul li a:hover {
     margin-bottom: 20px;
 }
 
+/* Profile Link Styles */
+.profile-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.profile-link:hover, .profile-link:focus {
+    text-decoration: none;
+    color: inherit;
+}
+
+
 /* Profile Info Styles */
 .profile-info {
     margin-left: 15px;
@@ -170,7 +182,6 @@ input, textarea, select {
     border-radius: 4px;
 }
 
-/* Remove bullet points from status message list */
 ul {
     list-style-type: none;
     padding-left: 0;
