@@ -7,10 +7,12 @@ Description: This file extends the base template and displays the delete status 
 {% extends 'mini_fb/base.html' %}
 
 {% block content %}
-<h2>Are you sure you want to delete this status?</h2>
-<form method="POST">
-    {% csrf_token %}
-    <button type="submit">Confirm Delete</button>
-</form>
-<a href="{% url 'show_profile' object.profile.pk %}">Cancel</a>
+<div style="text-align: center;">
+    <h2>Are you sure you want to delete this status?</h2>
+    <form method="POST" style="padding-bottom: 30px;">
+        {% csrf_token %}
+        <button type="submit">Confirm Delete</button>
+    </form>
+    <button><a href="{% url 'show_profile' object.profile.pk %}">Cancel</a></button>
+</div>
 {% endblock %}
