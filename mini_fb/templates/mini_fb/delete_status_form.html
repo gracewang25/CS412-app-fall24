@@ -9,10 +9,27 @@ Description: This file extends the base template and displays the delete status 
 {% block content %}
 <div style="text-align: center;">
     <h2>Are you sure you want to delete this status?</h2>
+
+    <!-- Display the status message -->
+    <div style="padding: 20px;">
+        <p><strong>Message:</strong> {{ object.message }}</p>
+        <p><strong>Posted on:</strong> {{ object.timestamp }}</p>
+
+        <!-- Display associated images -->
+        {% for img in object.get_images %}
+        <img src="{{ img.image_file.url }}" alt="Image for {{ object.message }}" style="max-width: 150px; padding: 10px;">
+        {% endfor %}
+    </div>
+
+    <!-- Delete confirmation form -->
     <form method="POST" style="padding-bottom: 30px;">
         {% csrf_token %}
         <button type="submit">Confirm Delete</button>
     </form>
-    <button><a href="{% url 'show_profile' object.profile.pk %}">Cancel</a></button>
+    
+    <!-- Cancel button -->
+    <button>
+        <a href="{% url 'show_profile' object.profile.pk %}" style="text-decoration: none; color: white;">Cancel</a>
+    </button>
 </div>
 {% endblock %}
