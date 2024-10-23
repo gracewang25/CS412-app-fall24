@@ -9,9 +9,10 @@ It includes the header, footer, and a content block for all templates to extend.
 
 {% block content %}
 <h2>Post a Status</h2>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
+    <input type="file" name="files" multiple>
     <button type="submit">Post Status</button>
 </form>
 {% endblock %}

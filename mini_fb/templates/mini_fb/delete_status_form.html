@@ -1,0 +1,16 @@
+<!-- 
+File: mini_fb/delete_status_form.html
+Author: Grace Wang (grace25@bu.edu), 10/21/2024
+Description: This file extends the base template and displays the delete status form.
+-->
+
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<h2>Are you sure you want to delete this status?</h2>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Confirm Delete</button>
+</form>
+<a href="{% url 'show_profile' object.profile.pk %}">Cancel</a>
+{% endblock %}

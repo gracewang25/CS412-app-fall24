@@ -32,12 +32,12 @@ ALLOWED_HOSTS = ['cs-412-assignment3-theta.vercel.app',
                  'cs-412-assignment5-cbsr.vercel.app',
                  'cs412-fall24.herokuapp.com',
                  '*',
-                 
-
-
 
 ]
 
+# Media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = "/media/"
 
 # Application definition
 

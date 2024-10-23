@@ -24,11 +24,33 @@ Description: This file extends the base template and displays a single user's pr
     <h2 style="text-align:center;">Status Messages</h2>
     <ul>
         {% for status in object.get_status_messages %}
-        <li>{{ status.timestamp }}: {{ status.message }}</li>
+        <li>
+            <div class="status-card">
+                <p>{{ status.timestamp }}: {{ status.message }}</p>
+                {% for img in status.get_images %}
+                <img src="{{ img.image_file.url }}" alt="Image for {{ status.message }}" style="max-width: 100px;">
+                {% endfor %}
+                <div class="action-buttons">
+                    <button>
+                        <a href="{% url 'update_status' status.pk %}">Update Status</a>
+                    </button>
+                    <button>
+                        <a href="{% url 'delete_status' status.pk %}">Delete Status</a>
+                    </button>
+                </div>
+            </div>
+        </li>
         {% empty %}
         <li>No status messages yet.</li>
         {% endfor %}
     </ul>
-    <a href="{% url 'create_status' object.pk %}" style="display: block; text-align: center; color: #FF1493; font-weight: bold;">Post a new status</a>
 
+    <div style="text-align:center;">
+        <a href="{% url 'create_status' object.pk %}" style="color: #FF1493; font-weight: bold;">Post a new status</a>
+    </div>
+    <div style="text-align:center;">
+        <button>
+            <a href="{% url 'update_profile' object.pk %}">Update Profile</a>
+        </button>
+    </div>
 {% endblock %}

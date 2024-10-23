@@ -1,0 +1,17 @@
+<!-- 
+File: mini_fb/update_status_form.html
+Author: Grace Wang (grace25@bu.edu), 10/21/2024
+Description: This file extends the base template and displays the update status form.
+-->
+
+
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<h2>Update Status Message</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Status</button>
+</form>
+{% endblock %}

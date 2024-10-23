@@ -1,0 +1,17 @@
+<!-- 
+File: mini_fb/update_profile_form.html
+Author: Grace Wang (grace25@bu.edu), 10/21/2024
+Description: This file extends the base template and displays the update profile form.
+-->
+
+
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<h2>Update Profile</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Profile</button>
+</form>
+{% endblock %}
