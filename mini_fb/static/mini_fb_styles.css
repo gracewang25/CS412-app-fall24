@@ -54,14 +54,14 @@ nav ul li a:hover {
 
 .profile-card {
     border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px;
+    padding: 20px;
+    margin: 20px;
     border-radius: 8px;
     box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
     display: flex;
     align-items: center;
-    width: 300px;
+    width: 400px;
     background-color: #fff;
 }
 

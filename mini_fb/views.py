@@ -15,6 +15,9 @@ from django.urls import reverse
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
+from django.views.generic import *
+from django.db.models import Q
+
 
 
 from .forms import *
@@ -96,3 +99,54 @@ class UpdateStatusMessageView(UpdateView):
         profile_id = self.object.profile.pk
         # Redirect back to the profile page
         return reverse_lazy('show_profile', kwargs={'pk': profile_id})
+    
+# File: mini_fb/views.py
+# Author: Grace Wang (grace25@bu.edu), 10/7/2024
+# Description: This file contains the Django views for the mini Facebook application, including the view for adding friends.
+
+from django.views.generic import View
+from django.urls import reverse_lazy
+from django.shortcuts import redirect
+from .models import Profile, Friend
+
+class CreateFriendView(View):
+    '''A view to handle adding a friend relationship between profiles.'''
+
+    def dispatch(self, request, *args, **kwargs):
+        profile_id = self.kwargs['pk']
+        other_profile_id = self.kwargs['other_pk']
+
+        # Prevent "self-friending"
+        if profile_id == other_profile_id:
+            return redirect(reverse_lazy('show_profile', kwargs={'pk': profile_id}))
+
+        # Retrieve the Profile objects
+        profile = Profile.objects.get(pk=profile_id)
+        other_profile = Profile.objects.get(pk=other_profile_id)
+
+        # Check if the friend relationship already exists
+        friend_exists = Friend.objects.filter(
+            (Q(profile1=profile) & Q(profile2=other_profile)) |
+            (Q(profile1=other_profile) & Q(profile2=profile))
+        ).exists()
+
+        # Only add the friend if the relationship does not exist
+        if not friend_exists:
+            Friend.objects.create(profile1=profile, profile2=other_profile)
+
+        # Redirect to the profile page
+        return redirect(reverse_lazy('show_profile', kwargs={'pk': profile_id}))
+
+
+
+class ShowFriendSuggestionsView(DetailView):
+    """A view to show friend suggestions for a profile."""
+    
+    model = Profile
+    template_name = 'mini_fb/friend_suggestions.html'
+    context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['suggested_friends'] = self.object.get_friend_suggestions()
+        return context

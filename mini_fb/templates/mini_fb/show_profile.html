@@ -20,6 +20,12 @@ Description: This file extends the base template and displays a single user's pr
             <p>Email: {{ object.email_address }}</p>
         </div>
     </div>
+<br>
+    <div style="text-align:center;">
+        <button>
+            <a href="{% url 'update_profile' object.pk %}">Update Profile</a>
+        </button>
+    </div>
 
     <h2 style="text-align:center;">Status Messages</h2>
     <ul>
@@ -48,9 +54,26 @@ Description: This file extends the base template and displays a single user's pr
     <div style="text-align:center; padding-bottom: 30px;">
         <a href="{% url 'create_status' object.pk %}" style="color: #FF1493; font-weight: bold;">Post a new status</a>
     </div>
-    <div style="text-align:center;">
-        <button>
-            <a href="{% url 'update_profile' object.pk %}">Update Profile</a>
-        </button>
-    </div>
+
+
+        <h2 style="text-align:center;">Friends</h2>
+
+
+<div class="profile-grid">
+    {% for friend in object.get_friends %}
+    <a href="{% url 'show_profile' friend.pk %}" class="profile-link">
+        <div class="profile-card">
+            <img src="{{ friend.profile_image_url }}" alt="Profile image of {{ friend.first_name }}" class="profile-image">
+            <div class="profile-info">
+                <h3>{{ friend.first_name }} {{ friend.last_name }}</h3>
+            </div>
+        </div>
+    </a>
+    {% empty %}
+    <p>No profiles available.</p>
+    {% endfor %}
+</div>
+<button>
+    <a href="{% url 'friend_suggestions' profile.pk %}">Friend Suggestions</a>
+</button>
 {% endblock %}

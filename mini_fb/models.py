@@ -31,6 +31,24 @@ class Profile(models.Model):
         for status in status_messages:
             status.timestamp = status.timestamp.astimezone(est_tz)
         return status_messages
+    
+    def get_friends(self):
+        friends1 = Friend.objects.filter(profile1=self).values_list('profile2', flat=True)
+        friends2 = Friend.objects.filter(profile2=self).values_list('profile1', flat=True)
+        return Profile.objects.filter(id__in=list(friends1) + list(friends2))
+    
+    def add_friend(self, other):
+        if self != other:
+            if not Friend.objects.filter(
+                models.Q(profile1=self, profile2=other) |
+                models.Q(profile1=other, profile2=self)
+            ).exists():
+                Friend.objects.create(profile1=self, profile2=other)
+
+    def get_friend_suggestions(self):
+        all_profiles = Profile.objects.exclude(id__in=self.get_friends()).exclude(id=self.id)
+        return all_profiles
+
 
 
     
@@ -53,3 +71,16 @@ class Image(models.Model):
     
     def __str__(self):
         return f"Image for status {self.status_message.id} uploaded on {self.timestamp}"
+
+# File: mini_fb/models.py
+# Author: Grace Wang (grace25@bu.edu), 10/7/2024
+# Description: Defines the Friend model and Profile methods for managing friends.
+
+class Friend(models.Model):
+    profile1 = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='profile1')
+    profile2 = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='profile2')
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.profile1.first_name} & {self.profile2.first_name}"
+
