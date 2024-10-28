@@ -1,4 +1,4 @@
-/* General styles */
+/* General Styles */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #fde4ec;
@@ -7,41 +7,34 @@ body {
     color: #333;
 }
 
-#padding {
-    padding: 120px;
-}
+#padding { padding: 120px; }
 
-/* Header styles */
+/* Header */
 header {
     background-color: #f080a5;
     color: #fff;
     padding: 25px;
     text-align: center;
 }
+header h1 { margin: 0; font-size: 2.7em; }
 
-header h1 {
-    margin: 0;
-    font-size: 2.7em;
+/* Navigation */
+nav ul { list-style: none; padding: 0; }
+nav ul li { display: inline; margin-right: 20px; }
+nav ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
 }
+nav ul li a:hover { color: #fff; }
 
-/* Navigation styles */
-nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-nav ul li a:hover {
-    color: #fff;
-}
-
-/* Profile Grid and Card Styles */
+/* Profile Grid & Cards */
 .profile-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
 }
-
 .profile-card, .profile-card-large {
     border: 1px solid #ddd;
     padding: 25px;
@@ -54,55 +47,35 @@ nav ul li a:hover {
     background-color: #fff;
     width: 90%;
     max-width: 600px;
+    text-decoration: none;
 }
-
 .profile-card:hover, .profile-card-large:hover {
     transform: scale(1.05);
     box-shadow: 3px 3px 25px rgba(0, 0, 0, 0.25);
 }
 
-/* Profile Image Styles */
+/* Profile Image */
 .profile-image, .profile-image-large {
     object-fit: cover;
     border-radius: 50%;
     border: 2px solid #f080a5;
 }
+.profile-image { width: 120px; height: 120px; }
+.profile-image-large { width: 180px; height: 180px; margin-bottom: 25px; }
 
-.profile-image {
-    width: 120px;
-    height: 120px;
-}
+/* Profile Link */
+.profile-link { text-decoration: none;}
+.profile-link:hover, .profile-link:focus {color: inherit; }
 
-.profile-image-large {
-    width: 180px;
-    height: 180px;
-    margin-bottom: 25px;
-}
-
-/* Profile Link Styles */
-.profile-link:hover, .profile-link:focus {
-    text-decoration: none;
-    color: inherit;
-}
-
-/* Profile Info Styles */
+/* Profile Info */
 .profile-info {
     margin-left: 20px;
     text-align: center;
 }
+.profile-info h3 { margin: 0 0 20px; font-size: 1.8em; color: #f080a5; }
+.profile-info p { margin: 15px 0; color: #666; }
 
-.profile-info h3 {
-    margin: 0 0 20px 0;
-    font-size: 1.8em;
-    color: #f080a5;
-}
-
-.profile-info p {
-    margin: 15px 0;
-    color: #666;
-}
-
-/* Status Message Card Styles */
+/* Status Message Card */
 .status-card {
     border: 1px solid #ddd;
     padding: 20px;
@@ -112,14 +85,9 @@ nav ul li a:hover {
     background-color: #fff;
     width: 90%;
 }
+.status-card .action-buttons { text-align: center; margin-top: 15px; }
 
-/* Center buttons below the status message */
-.status-card .action-buttons {
-    text-align: center;
-    margin-top: 15px;
-}
-
-/* Button styles */
+/* Button Styles */
 button {
     background-color: #e07b99;
     color: white;
@@ -131,26 +99,11 @@ button {
     display: inline-block;
     margin: 10px 0;
 }
+button:hover { background-color: #d06c88; }
+button a { color: white; text-decoration: none; }
+button a:hover { text-decoration: underline; }
 
-button:hover {
-    background-color: #d06c88;
-}
-
-button a {
-    color: white;
-    text-decoration: none;
-}
-
-button a:hover {
-    text-decoration: underline;
-}
-
-button.centered {
-    display: flex;
-    justify-content: center;
-    margin: 20px auto;
-}
-
+/* Input and Select */
 input, textarea, select {
     width: 100%;
     max-width: 450px;
@@ -158,9 +111,16 @@ input, textarea, select {
     margin: 15px 0;
     border: 1px solid #ddd;
     border-radius: 6px;
+
 }
 
-/* Footer styles */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+
+/* Footer */
 footer {
     background-color: #f080a5;
     color: #fff;
