@@ -38,16 +38,28 @@ class Profile(models.Model):
         return Profile.objects.filter(id__in=list(friends1) + list(friends2))
     
     def add_friend(self, other):
-        if self != other:
-            if not Friend.objects.filter(
-                models.Q(profile1=self, profile2=other) |
-                models.Q(profile1=other, profile2=self)
-            ).exists():
-                Friend.objects.create(profile1=self, profile2=other)
+            """Adds a friend if not already friends and not self-friending."""
+            if self == other:
+                return  # Prevent self-friending
+            if not Friend.objects.filter(models.Q(profile1=self, profile2=other) | models.Q(profile1=other, profile2=self)).exists():
+                Friend.objects.create(profile1=self, profile2=other, timestamp=timezone.now())
 
     def get_friend_suggestions(self):
-        all_profiles = Profile.objects.exclude(id__in=self.get_friends()).exclude(id=self.id)
-        return all_profiles
+            """Returns a list of profiles not friends with self and excludes self."""
+            current_friends = self.get_friends().values_list('id', flat=True)
+            return Profile.objects.exclude(id__in=current_friends).exclude(id=self.id)
+
+    def get_news_feed(self):
+        """Return a queryset of status messages from the profile and its friends, ordered by the most recent."""
+        # Get friends' profiles
+        friends_profiles = list(self.get_friends())
+        
+        # Include the profile itself and all friends
+        profiles_to_include = [self] + friends_profiles
+        
+        # Get status messages for all profiles in profiles_to_include
+        return StatusMessage.objects.filter(profile__in=profiles_to_include).order_by('-timestamp')
+
 
 
 

@@ -55,6 +55,9 @@ Description: This file extends the base template and displays a single user's pr
         <a href="{% url 'create_status' object.pk %}" style="color: #FF1493; font-weight: bold;">Post a new status</a>
     </div>
 
+<button>
+    <a href="{% url 'news_feed' profile.pk %}" style="text-decoration: none; color: white;">View News Feed</a>
+</button>
 
         <h2 style="text-align:center;">Friends</h2>
 
@@ -76,4 +79,5 @@ Description: This file extends the base template and displays a single user's pr
 <button>
     <a href="{% url 'friend_suggestions' profile.pk %}">Friend Suggestions</a>
 </button>
+
 {% endblock %}

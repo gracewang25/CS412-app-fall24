@@ -1,48 +1,37 @@
 /* General styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f0f8ff;
+    background-color: #fde4ec;
     margin: 0;
     padding: 0;
     color: #333;
 }
 
 #padding {
-    padding: 100px;
+    padding: 120px;
 }
 
 /* Header styles */
 header {
-    background-color: #C71585; /* Muted neutral dark pink */
+    background-color: #f080a5;
     color: #fff;
-    padding: 20px;
+    padding: 25px;
     text-align: center;
 }
 
 header h1 {
     margin: 0;
-    font-size: 2.5em;
+    font-size: 2.7em;
 }
 
 /* Navigation styles */
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-
 nav ul li {
     display: inline;
-    margin-right: 15px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    font-weight: bold;
-    color: #333;
+    margin-right: 20px;
 }
 
 nav ul li a:hover {
-    color: #fff; 
+    color: #fff;
 }
 
 /* Profile Grid and Card Styles */
@@ -50,118 +39,101 @@ nav ul li a:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 30px;
 }
 
-.profile-card {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 8px;
-    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+.profile-card, .profile-card-large {
+    border: 1px solid #ddd;
+    padding: 25px;
+    margin: 25px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.15);
     transition: transform 0.2s;
     display: flex;
     align-items: center;
-    width: 400px;
     background-color: #fff;
+    width: 90%;
+    max-width: 600px;
 }
 
-.profile-card:hover {
+.profile-card:hover, .profile-card-large:hover {
     transform: scale(1.05);
-    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
-}
-
-.profile-card-large {
-    width: 400px; 
-    padding: 20px;
+    box-shadow: 3px 3px 25px rgba(0, 0, 0, 0.25);
 }
 
 /* Profile Image Styles */
 .profile-image, .profile-image-large {
     object-fit: cover;
     border-radius: 50%;
-    border: 2px solid #C71585; /* Muted neutral dark pink */
+    border: 2px solid #f080a5;
 }
 
 .profile-image {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
 }
 
 .profile-image-large {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 20px;
+    width: 180px;
+    height: 180px;
+    margin-bottom: 25px;
 }
 
 /* Profile Link Styles */
-.profile-link {
-    text-decoration: none;
-    color: inherit;
-}
-
 .profile-link:hover, .profile-link:focus {
     text-decoration: none;
     color: inherit;
 }
 
-
 /* Profile Info Styles */
 .profile-info {
-    margin-left: 15px;
+    margin-left: 20px;
     text-align: center;
 }
 
 .profile-info h3 {
-    margin: 0 0 15px 0;
-    font-size: 1.6em;
-    color: #C71585; /* Muted neutral dark pink */
+    margin: 0 0 20px 0;
+    font-size: 1.8em;
+    color: #f080a5;
 }
 
 .profile-info p {
-    margin: 10px 0;
-    color: #555;
+    margin: 15px 0;
+    color: #666;
 }
 
 /* Status Message Card Styles */
 .status-card {
     border: 1px solid #ddd;
-    padding: 15px;
-    margin: 20px auto;
-    border-radius: 10px;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 30px auto;
+    border-radius: 12px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    width: 80%;
-}
-
-.status-card img {
-    display: block;
-    margin: 10px auto;
-}
-
-.status-card p {
-    margin: 10px 0;
+    width: 90%;
 }
 
 /* Center buttons below the status message */
 .status-card .action-buttons {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 /* Button styles */
 button {
-    background-color: #c71568; /* Muted neutral dark pink */
+    background-color: #e07b99;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1em;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1.1em;
     cursor: pointer;
     display: inline-block;
+    margin: 10px 0;
 }
 
 button:hover {
-    background-color: #a3136d; 
+    background-color: #d06c88;
 }
 
 button a {
@@ -173,26 +145,27 @@ button a:hover {
     text-decoration: underline;
 }
 
-input, textarea, select {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+button.centered {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
 }
 
-ul {
-    list-style-type: none;
-    padding-left: 0;
+input, textarea, select {
+    width: 100%;
+    max-width: 450px;
+    padding: 12px;
+    margin: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
 }
 
 /* Footer styles */
 footer {
-    background-color: #C71585; 
+    background-color: #f080a5;
     color: #fff;
     text-align: center;
-    padding: 10px 0;
+    padding: 15px 0;
     position: fixed;
     bottom: 0;
     width: 100%;

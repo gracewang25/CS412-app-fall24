@@ -12,6 +12,7 @@ from django import forms
 from .models import Profile
 from django.urls import reverse_lazy
 from django.urls import reverse
+from django.shortcuts import redirect
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
@@ -100,15 +101,6 @@ class UpdateStatusMessageView(UpdateView):
         # Redirect back to the profile page
         return reverse_lazy('show_profile', kwargs={'pk': profile_id})
     
-# File: mini_fb/views.py
-# Author: Grace Wang (grace25@bu.edu), 10/7/2024
-# Description: This file contains the Django views for the mini Facebook application, including the view for adding friends.
-
-from django.views.generic import View
-from django.urls import reverse_lazy
-from django.shortcuts import redirect
-from .models import Profile, Friend
-
 class CreateFriendView(View):
     '''A view to handle adding a friend relationship between profiles.'''
 
@@ -137,8 +129,6 @@ class CreateFriendView(View):
         # Redirect to the profile page
         return redirect(reverse_lazy('show_profile', kwargs={'pk': profile_id}))
 
-
-
 class ShowFriendSuggestionsView(DetailView):
     """A view to show friend suggestions for a profile."""
     
@@ -149,4 +139,16 @@ class ShowFriendSuggestionsView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['suggested_friends'] = self.object.get_friend_suggestions()
+        return context
+    
+class ShowNewsFeedView(DetailView):
+    """View to show the news feed for a specific profile."""
+    model = Profile
+    template_name = 'mini_fb/news_feed.html'
+    context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Get the news feed for the profile
+        context['news_feed'] = self.object.get_news_feed()
         return context
