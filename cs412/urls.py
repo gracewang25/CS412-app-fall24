@@ -31,7 +31,7 @@ urlpatterns = [
     path('restaurant/', include('restaurant.urls')),
     # Assignment 5
     path('mini_fb/', include('mini_fb.urls')),
-    path('blog/', include('blog.urls')),
+    # path('blog/', include('blog.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

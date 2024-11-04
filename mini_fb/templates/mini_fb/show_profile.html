@@ -21,11 +21,25 @@ Description: This file extends the base template and displays a single user's pr
         </div>
     </div>
 <br>
+
+{% if request.user == object.user %}
     <div style="text-align:center;">
         <button>
-            <a href="{% url 'update_profile' object.pk %}">Update Profile</a>
+            <a href="{% url 'update_profile' %}">Update Profile</a>
         </button>
     </div>
+
+    
+    <div style="text-align:center; padding-bottom: 30px;">
+        <button><a href="{% url 'create_status' %}">Post a new status</a></button>
+    </div>
+{% else %}
+<div style="text-align:center">
+        <button>Not able to edit!</button>
+    
+</div>    
+{% endif %}
+
 
     <h2 style="text-align:center;">Status Messages</h2>
     <ul>
@@ -36,6 +50,7 @@ Description: This file extends the base template and displays a single user's pr
                 {% for img in status.get_images %}
                 <img src="{{ img.image_file.url }}" alt="Image for {{ status.message }}" style="max-width: 100px;">
                 {% endfor %}
+                {% if request.user == object.user %}
                 <div class="action-buttons">
                     <button>
                         <a href="{% url 'update_status' status.pk %}">Update Status</a>
@@ -44,25 +59,18 @@ Description: This file extends the base template and displays a single user's pr
                         <a href="{% url 'delete_status' status.pk %}">Delete Status</a>
                     </button>
                 </div>
+            {% endif %}
             </div>
         </li>
         {% empty %}
-        <li>No status messages yet.</li>
-        {% endfor %}
+<div style="text-align: center;">
+            No status messages yet.
+    
+</div>        {% endfor %}
     </ul>
 
-    <div style="text-align:center; padding-bottom: 30px;">
-        <a href="{% url 'create_status' object.pk %}" style="color: #FF1493; font-weight: bold;">Post a new status</a>
-    </div>
 
-<div style="text-align: center;">
-    <button>
-        <a href="{% url 'news_feed' profile.pk %}" style="text-decoration: none; color: white;">View News Feed</a>
-    </button>
-</div>
-
-        <h2 style="text-align:center;">Friends</h2>
-
+<h2 style="text-align:center;">Friends</h2>
 
 <div class="profile-grid">
     {% for friend in object.get_friends %}
@@ -78,10 +86,13 @@ Description: This file extends the base template and displays a single user's pr
     <p>No profiles available.</p>
     {% endfor %}
 </div>
-<div style="text-align: center;">
-    <button>
-        <a href="{% url 'friend_suggestions' profile.pk %}">Friend Suggestions</a>
-    </button>
-</div>
+
+    {% if request.user == object.user %}
+    <div style="text-align: center;">
+        <button>
+            <a href="{% url 'friend_suggestions' %}">Friend Suggestions</a>
+        </button>
+    </div>
+    {% endif %}
 
 {% endblock %}

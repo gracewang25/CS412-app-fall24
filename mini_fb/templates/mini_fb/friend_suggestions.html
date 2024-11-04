@@ -13,12 +13,12 @@ Description: Displays friend suggestions for a profile.
     <div class="friend-suggestions">
         {% for suggested_friend in suggested_friends %}
         <div class="profile-card">
-<button>
-                <a href="{% url 'add_friend' profile.pk suggested_friend.pk %}" class="add-friend-button">Add Friend</a>
-    
-</button>            <img src="{{ suggested_friend.profile_image_url }}" alt="Profile image of {{ suggested_friend.first_name }}" class="profile-image">
+            <button>
+                <a href="{% url 'add_friend' suggested_friend.pk %}" class="add-friend-button">Add Friend</a>
+            </button>
+            <img src="{{ suggested_friend.profile_image_url }}" alt="Profile image of {{ suggested_friend.first_name }}" class="profile-image">
             <h3>{{ suggested_friend.first_name }} {{ suggested_friend.last_name }}</h3>
-        </div>
+\       </div>
         {% empty %}
         <p>No friend suggestions available.</p>
         {% endfor %}

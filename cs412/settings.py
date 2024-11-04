@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'formdata', #in-class example
     'restaurant', # a4
     'mini_fb', # a5
-    'blog' #in class example
+    # 'blog' #in class example
 ]
 
 MIDDLEWARE = [
@@ -69,6 +69,8 @@ MIDDLEWARE = [
     
     
 ]
+
+LOGIN_URL = '/mini_fb/login/'
 
 ROOT_URLCONF = 'cs412.urls'
 

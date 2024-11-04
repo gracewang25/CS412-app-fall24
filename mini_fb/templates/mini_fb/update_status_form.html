@@ -13,5 +13,8 @@ Description: This file extends the base template and displays the update status 
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Update Status</button>
-</form>
+    <button><a href="{% url 'show_profile' object.pk %}">Cancel</a></button>
+    
+    </form>
 {% endblock %}
+ 

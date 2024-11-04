@@ -6,6 +6,8 @@
 from django.db import models
 from django.utils import timezone
 import pytz
+from django.contrib.auth.models import User
+from django.db import models
 
 # Create your models here.
 class Profile(models.Model):
@@ -19,6 +21,9 @@ class Profile(models.Model):
 
     published = models.DateTimeField(auto_now=True)
     profile_image_url = models.URLField(blank=True)
+
+    # fk to user
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 
     def __str__(self):
         '''Return a string representation of this Profile.'''
@@ -61,9 +66,6 @@ class Profile(models.Model):
         return StatusMessage.objects.filter(profile__in=profiles_to_include).order_by('-timestamp')
 
 
-
-
-    
 class StatusMessage(models.Model):
     '''Models the data attributes of Facebook status message.'''
     timestamp = models.DateTimeField(auto_now_add=True)

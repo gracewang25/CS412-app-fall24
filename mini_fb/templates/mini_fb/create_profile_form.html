@@ -10,6 +10,8 @@ Description: This file contains the form to create a new profile.
 <form method="POST" enctype="multipart/form-data" style="max-width: 500px; margin: 0 auto;">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Create Profile</button>
+    {{ user_form.as_p }}
+
+    <button type="submit">Register and Create Profile</button>
 </form>
 {% endblock %}
