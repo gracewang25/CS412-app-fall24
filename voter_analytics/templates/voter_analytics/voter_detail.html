@@ -1,0 +1,17 @@
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+<h1>{{ object.first_name }} {{ object.last_name }}</h1>
+<p>Party Affiliation: {{ object.party_affiliation }}</p>
+<p>Address: {{ object.street_number }} {{ object.street_name }}, {{ object.zip_code }}</p>
+<p>Date of Birth: {{ object.date_of_birth }}</p>
+<p>Registration Date: {{ object.date_of_registration }}</p>
+
+<p>Google Maps: <a href="{{ google_maps_link }}" target="_blank">View on Google Maps</a></p>
+
+<p>Voted in 2020 State Election: {{ object.v20state }}</p>
+<p>Voted in 2021 Town Election: {{ object.v21town }}</p>
+<p>Voted in 2021 Primary Election: {{ object.v21primary }}</p>
+<p>Voted in 2022 General Election: {{ object.v22general }}</p>
+<p>Voted in 2023 Town Election: {{ object.v23town }}</p>
+{% endblock %}

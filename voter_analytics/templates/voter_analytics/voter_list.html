@@ -1,0 +1,36 @@
+
+{% extends 'voter_analytics/base.html' %}
+
+
+{% block content %}
+
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit">Filter</button>
+</form>
+
+{% if object_list %}
+    <ul>
+        {% for voter in object_list %}
+            <li>
+                {{ voter.first_name }} {{ voter.last_name }} - {{ voter.party_affiliation }}
+                <a href="{% url 'voter' voter.pk %}">View Details</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="pagination">
+        {% if is_paginated %}
+            {% if page_obj.has_previous %}
+                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.next_page_number }}">Next</a>
+            {% endif %}
+        {% endif %}
+    </div>
+{% else %}
+    <p>No voters found matching the criteria.</p>
+{% endif %}
+
+{% endblock %}

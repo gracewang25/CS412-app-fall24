@@ -1,5 +1,6 @@
 from django.db import models
 from django.db import transaction
+import csv
 
 # Create your models here.
 class Voter(models.Model):
@@ -23,8 +24,15 @@ class Voter(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
     
+def reset():
+       Voter.objects.all().delete()
+
 def load_data():
-    with open('path/to/newton_voters.csv', newline='') as csvfile:
+
+    Voter.objects.all().delete()
+
+
+    with open('voter_analytics/newton_voters.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         with transaction.atomic():
             for row in reader:
@@ -39,10 +47,10 @@ def load_data():
                     date_of_registration=row['Date of Registration'],
                     party_affiliation=row['Party Affiliation'],
                     precinct_number=row['Precinct Number'],
-                    v20state=row['v20state'] == 'True',
-                    v21town=row['v21town'] == 'True',
-                    v21primary=row['v21primary'] == 'True',
+                    v20state=row['v20state'] == 'TRUE',
+                    v21town=row['v21town'] == 'TRUE',
+                    v21primary=row['v21primary'] == 'TRUE',
                     v22general=row['v22general'] == 'True',
-                    v23town=row['v23town'] == 'True',
+                    v23town=row['v23town'] == 'TRUE',
                     voter_score=int(row['voter_score'])
                 )

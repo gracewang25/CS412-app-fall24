@@ -31,7 +31,7 @@ urlpatterns = [
     path('restaurant/', include('restaurant.urls')),
     # Assignment 5
     path('mini_fb/', include('mini_fb.urls')),
-    path('voter_analytics', include('voter_analytics.urls')),
+    path('voter_analytics/', include('voter_analytics.urls')),
     path('marathon_analytics', include('marathon_analytics.urls')), # in class ex
 
 ]

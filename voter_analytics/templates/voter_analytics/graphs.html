@@ -1,0 +1,22 @@
+{% extends "voter_analytics/base.html" %}
+
+{% block title %}Voter Data Graphs{% endblock %}
+
+{% block content %}
+    <h2>Voter Data Graphs</h2>
+
+    <div>
+        <h3>Distribution of Voters by Year of Birth</h3>
+        {{ birth_year_histogram|safe }}
+    </div>
+
+    <div>
+        <h3>Distribution of Voters by Party Affiliation</h3>
+        {{ party_pie_chart|safe }}
+    </div>
+
+    <div>
+        <h3>Distribution of Voters by Election Participation</h3>
+        {{ election_histogram|safe }}
+    </div>
+{% endblock %}
