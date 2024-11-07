@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'restaurant', # a4
     'mini_fb', # a5
     # 'blog' #in class example
+    'marathon_analytics', # in class example
+    'voter_analytics',
 ]
 
 MIDDLEWARE = [

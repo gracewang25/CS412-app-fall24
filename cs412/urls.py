@@ -31,7 +31,9 @@ urlpatterns = [
     path('restaurant/', include('restaurant.urls')),
     # Assignment 5
     path('mini_fb/', include('mini_fb.urls')),
-    # path('blog/', include('blog.urls')),
+    path('voter_analytics', include('voter_analytics.urls')),
+    path('marathon_analytics', include('marathon_analytics.urls')), # in class ex
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
