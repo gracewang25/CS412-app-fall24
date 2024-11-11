@@ -28,29 +28,32 @@ def reset():
        Voter.objects.all().delete()
 
 def load_data():
-
+    # Clear existing Voter records
     Voter.objects.all().delete()
-
 
     with open('voter_analytics/newton_voters.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         with transaction.atomic():
             for row in reader:
+                # Apply .strip() to each field to clean whitespace
                 Voter.objects.create(
-                    first_name=row['First Name'],
-                    last_name=row['Last Name'],
-                    street_number=row['Residential Address - Street Number'],
-                    street_name=row['Residential Address - Street Name'],
-                    apartment_number=row['Residential Address - Apartment Number'],
-                    zip_code=row['Residential Address - Zip Code'],
-                    date_of_birth=row['Date of Birth'],
-                    date_of_registration=row['Date of Registration'],
-                    party_affiliation=row['Party Affiliation'],
-                    precinct_number=row['Precinct Number'],
-                    v20state=row['v20state'] == 'TRUE',
-                    v21town=row['v21town'] == 'TRUE',
-                    v21primary=row['v21primary'] == 'TRUE',
-                    v22general=row['v22general'] == 'True',
-                    v23town=row['v23town'] == 'TRUE',
-                    voter_score=int(row['voter_score'])
+                    first_name=row['First Name'].strip(),
+                    last_name=row['Last Name'].strip(),
+                    street_number=row['Residential Address - Street Number'].strip(),
+                    street_name=row['Residential Address - Street Name'].strip(),
+                    apartment_number=row['Residential Address - Apartment Number'].strip() if row['Residential Address - Apartment Number'] else None,
+                    zip_code=row['Residential Address - Zip Code'].strip(),
+                    date_of_birth=row['Date of Birth'].strip(),
+                    date_of_registration=row['Date of Registration'].strip(),
+                    party_affiliation=row['Party Affiliation'].strip(),
+                    precinct_number=row['Precinct Number'].strip(),
+
+                    # Convert each election participation field to a boolean
+                    v20state=row['v20state'].strip().lower() in ['true', '1', 'yes'],
+                    v21town=row['v21town'].strip().lower() in ['true', '1', 'yes'],
+                    v21primary=row['v21primary'].strip().lower() in ['true', '1', 'yes'],
+                    v22general=row['v22general'].strip().lower() in ['true', '1', 'yes'],
+                    v23town=row['v23town'].strip().lower() in ['true', '1', 'yes'],
+
+                    voter_score=int(row['voter_score'].strip())
                 )

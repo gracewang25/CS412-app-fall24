@@ -7,7 +7,13 @@ class VoterFilterForm(forms.Form):
         ('D', 'Democratic'),
         ('R', 'Republican'),
         ('U', 'Unaffiliated'),
-        # Add other party options as needed
+        ('L', 'Libertarian Party'),
+        ('T', 'Tea Party'),
+        ('O', 'Other'),
+        ('G', 'Green Party'),
+        ('J', 'Independent Party'),
+        ('Q', 'Reform Party'),
+        ('FF', 'Freedom Party'),
     ]
     
     VOTER_SCORE_CHOICES = [

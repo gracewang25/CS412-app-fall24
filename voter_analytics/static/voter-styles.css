@@ -8,7 +8,8 @@
 
 /* Root Variables */
 :root {
-    --accent-color: #6a0dad; /* Purple */
+    --accent-color: #9caf88; 
+    --link-color: #4b6b3c; 
     --background-color: #f9f9f9;
     --text-color: #333;
     --light-gray: #e0e0e0;
@@ -61,7 +62,7 @@ nav ul li a:hover {
 
 /* Main Content */
 main {
-    max-width: 800px;
+    max-width: 80%;
     margin: 0 auto;
     padding: 20px;
     background-color: white;
@@ -101,7 +102,7 @@ form button {
 }
 
 form button:hover {
-    background-color: #5c0c9a;
+    background-color: #869974;
 }
 
 /* Lists */
@@ -113,7 +114,6 @@ ul {
 
 ul li {
     padding: 10px;
-    border-bottom: 1px solid var(--light-gray);
 }
 
 ul li:last-child {
@@ -142,7 +142,6 @@ ul li:last-child {
     color: white;
 }
 
-
 /* Buttons */
 button, .button {
     background-color: var(--accent-color);
@@ -156,7 +155,7 @@ button, .button {
 }
 
 button:hover, .button:hover {
-    background-color: #5c0c9a;
+    background-color: #869974;
 }
 
 /* Graphs */
@@ -168,11 +167,14 @@ button:hover, .button:hover {
     background-color: var(--background-color);
 }
 
+.graph-container .plotly-graph-div {
+    color: var(--accent-color);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     body {
         padding: 10px;
     }
-
-  
 }
+

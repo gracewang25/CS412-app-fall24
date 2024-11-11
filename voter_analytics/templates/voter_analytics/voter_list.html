@@ -4,7 +4,8 @@
 
 {% block content %}
 
-<form method="get">
+<form method="POST">
+    {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Filter</button>
 </form>
@@ -18,19 +19,34 @@
             </li>
         {% endfor %}
     </ul>
+
     <div class="pagination">
         {% if is_paginated %}
-            {% if page_obj.has_previous %}
-                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}">Previous</a>
-            {% endif %}
-            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-            {% if page_obj.has_next %}
-                <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.next_page_number }}">Next</a>
-            {% endif %}
+            <form method="POST" style="display: inline;">
+                {% csrf_token %}
+                
+                <!-- Include hidden fields to persist form data -->
+                {% for field in form.fields %}
+                    <input type="hidden" name="{{ field }}" value="{{ form.cleaned_data.field }}">
+                {% endfor %}
+
+                <!-- Previous Page Link -->
+                {% if page_obj.has_previous %}
+                    <button type="submit" name="page" value="{{ page_obj.previous_page_number }}">Previous</button>
+                {% endif %}
+
+                <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+                <!-- Next Page Link -->
+                {% if page_obj.has_next %}
+                    <button type="submit" name="page" value="{{ page_obj.next_page_number }}">Next</button>
+                {% endif %}
+            </form>
         {% endif %}
     </div>
 {% else %}
     <p>No voters found matching the criteria.</p>
 {% endif %}
+
 
 {% endblock %}
