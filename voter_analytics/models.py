@@ -1,3 +1,5 @@
+# voter_analytics/models.py
+
 from django.db import models
 from django.db import transaction
 import csv

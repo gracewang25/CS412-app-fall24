@@ -1,3 +1,5 @@
+# voter_analytics/views.py
+
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
 from .models import *
@@ -8,7 +10,7 @@ import plotly.graph_objects as go
 class VoterListView(ListView):
     model = Voter
     template_name = 'voter_analytics/voter_list.html'
-    paginate_by = 100  # Set pagination to 100
+    paginate_by = 100 
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -17,7 +19,7 @@ class VoterListView(ListView):
         if self.request.method == 'POST':
             form = VoterFilterForm(self.request.POST)
         else:
-            form = VoterFilterForm(self.request.GET)  # This allows initial page load without filters
+            form = VoterFilterForm(self.request.GET)  
 
         # Apply filters if the form is valid
         if form.is_valid():
@@ -60,7 +62,7 @@ class GraphView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Define party affiliation mapping
+        # Define party affiliation mapping, correctly grab affiliations
         PARTY_MAP = {
             "U": "Unaffiliated",
             "D": "Democratic",
@@ -88,11 +90,9 @@ class GraphView(TemplateView):
         )
         context['birth_year_histogram'] = birth_year_histogram.to_html()
 
-        # Distribution by Party Affiliation
         party_data = Voter.objects.exclude(party_affiliation__isnull=True).exclude(party_affiliation__exact="").values_list('party_affiliation', flat=True)
         cleaned_parties = [party.strip() for party in party_data if party.strip()]
 
-        # Translate party codes to names using PARTY_MAP
         translated_parties = [PARTY_MAP.get(party, "Other") for party in cleaned_parties]
 
         # Aggregate counts for each party name

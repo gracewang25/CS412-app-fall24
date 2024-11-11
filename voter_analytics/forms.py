@@ -1,3 +1,5 @@
+# voter_analytics/forms.py
+
 from django import forms
 from .models import Voter
 

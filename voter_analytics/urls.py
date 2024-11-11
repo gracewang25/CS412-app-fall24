@@ -1,7 +1,9 @@
+# voter_analytics/urls.py
+
 from django.urls import path
 from . import views 
-from .views import *
 
+from .views import *
 
 urlpatterns = [ 
     # map the URL (empty string) to the view
