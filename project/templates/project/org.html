@@ -1,0 +1,33 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<div class="org-container">
+    <h1>{{ org.name }}</h1>
+    {% if org.profile_picture %}
+        <img src="{{ org.profile_picture.url }}" alt="{{ org.name }}'s Profile Picture" class="org-image">
+    {% else %}
+        <p><em>No profile picture available.</em></p>
+    {% endif %}
+    <p><strong>Location:</strong> {{ org.location }}</p>
+    <p><strong>Email:</strong> <a href="mailto:{{ org.email }}">{{ org.email }}</a></p>
+
+    <h2>About</h2>
+    <p>{{ org.description }}</p>
+
+    <h2>Status Messages</h2>
+    <div class="status-messages">
+        {% for status in status_messages %}
+        <div class="status">
+            <p><strong>{{ status.timestamp|date:"M d, Y H:i" }}:</strong> {{ status.message }}</p>
+            <div class="status-images">
+                {% for image in status.get_images %}
+                <img src="{{ image.image_file.url }}" alt="Status Image" class="status-image">
+                {% endfor %}
+            </div>
+        </div>
+        {% empty %}
+        <p>No status messages to display.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

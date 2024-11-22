@@ -1,0 +1,18 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h2>Register</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h3>User Information</h3>
+    {{ user_form.as_p }}
+    <h3>Organization Information</h3>
+    {{ org_form.as_p }}
+    <button type="submit">Register</button>
+</form>
+{% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+{% endblock %}

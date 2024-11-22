@@ -1,0 +1,22 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h1>Rent/Buy Item</h1>
+<p><strong>Name:</strong> {{ item.name }}</p>
+<p><strong>Description:</strong> {{ item.description }}</p>
+<p><strong>Price Per Unit:</strong> ${{ item.pricing_per_unit }}</p>
+<p><strong>Available Sizes:</strong></p>
+<ul>
+    <li>Small: {{ item.size_s }}</li>
+    <li>Medium: {{ item.size_m }}</li>
+    <li>Large: {{ item.size_l }}</li>
+    <li>Extra Large: {{ item.size_xl }}</li>
+</ul>
+
+<form method="post">
+    {% csrf_token %}
+    <label for="duration">Duration (in days):</label>
+    <input type="number" id="duration" name="duration" value="1" min="1">
+    <button type="submit">Rent</button>
+</form>
+{% endblock %}

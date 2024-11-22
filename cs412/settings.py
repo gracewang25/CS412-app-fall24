@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     # 'blog' #in class example
     'marathon_analytics', # in class example
     'voter_analytics',
+    'project'
 ]
 
 MIDDLEWARE = [

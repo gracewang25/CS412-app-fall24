@@ -1,0 +1,47 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h1>Browse Rentals</h1>
+
+<h2>Friends' Rentals</h2>
+<div class="browse-grid">
+    {% for rental in friends_rentals %}
+    <div class="rental-item">
+        <h3>{{ rental.item.name }}</h3>
+        <p>{{ rental.item.description }}</p>
+        <p>Type: {{ rental.item.item_type }}</p>
+        <p>Price: ${{ rental.item.pricing_per_unit }}</p>
+        <p>Available Sizes: 
+            <ul>
+                <li>Small: {{ rental.item.size_s }}</li>
+                <li>Medium: {{ rental.item.size_m }}</li>
+                <li>Large: {{ rental.item.size_l }}</li>
+                <li>Extra Large: {{ rental.item.size_xl }}</li>
+            </ul>
+        </p>
+        <a href="{% url 'rent_item' rental.item.id %}">Rent/Buy</a> <!-- Link to the rent page -->
+    </div>
+    {% endfor %}
+</div>
+
+<h2>Other Rentals</h2>
+<div class="browse-grid">
+    {% for rental in other_rentals %}
+    <div class="rental-item">
+        <h3>{{ rental.item.name }}</h3>
+        <p>{{ rental.item.description }}</p>
+        <p>Type: {{ rental.item.item_type }}</p>
+        <p>Price: ${{ rental.item.pricing_per_unit }}</p>
+        <p>Available Sizes: 
+            <ul>
+                <li>Small: {{ rental.item.size_s }}</li>
+                <li>Medium: {{ rental.item.size_m }}</li>
+                <li>Large: {{ rental.item.size_l }}</li>
+                <li>Extra Large: {{ rental.item.size_xl }}</li>
+            </ul>
+        </p>
+        <a href="{% url 'rent_item' rental.item.id %}">Rent/Buy</a> <!-- Link to the rent page -->
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

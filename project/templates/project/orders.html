@@ -1,0 +1,31 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h1>Orders</h1>
+
+<h2>Orders in Progress</h2>
+<div class="orders-grid">
+    {% for order in in_progress_orders %}
+    <div class="order-item">
+        <h3>{{ order.item.name }}</h3>
+        <p>{{ order.organization.name }}</p>
+        <p>Rental Duration: {{ order.duration }} days</p>
+        <p>Total Cost: ${{ order.total_cost }}</p>
+        <p>Status: {{ order.rental_status }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<h2>Previous Orders</h2>
+<div class="orders-grid">
+    {% for order in completed_orders %}
+    <div class="order-item">
+        <h3>{{ order.item.name }}</h3>
+        <p>{{ order.organization.name }}</p>
+        <p>Rental Duration: {{ order.duration }} days</p>
+        <p>Total Cost: ${{ order.total_cost }}</p>
+        <p>Return Date: {{ order.return_date }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
