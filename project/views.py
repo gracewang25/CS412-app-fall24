@@ -25,9 +25,11 @@ from .forms import *
 
 from django.conf import settings
 
-
+# Home page view
+class HomePageView(TemplateView):
+    template_name = 'project/home.html'
+    
 # Profile page view
-
 class OrgProfileView(DetailView):
     model = Org
     template_name = 'project/org.html'

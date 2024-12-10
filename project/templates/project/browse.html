@@ -4,9 +4,9 @@
 
 <!-- Original Browse Grid -->
 <h2>Friends' Rentals</h2>
-<div class="browse-grid">
+<div class="card-container">
     {% for item in friends_items %}
-    <div class="rental-item">
+    <div class="card">
         <h3>{{ item.name }}</h3>
         {% if item.org.profile_picture %}
             <img src="{{ item.org.profile_picture.url }}" alt="{{ item.org.name }}'s Profile Picture">
@@ -34,9 +34,9 @@
 </div>
 
 <h2>Other Rentals</h2>
-<div class="browse-grid">
+<div class="card-container">
     {% for item in other_items %}
-    <div class="rental-item">
+    <div class="card">
         <h3>{{ item.name }}</h3>
         {% if item.org.profile_picture %}
             <img src="{{ item.org.profile_picture.url }}" alt="{{ item.org.name }}'s Profile Picture">

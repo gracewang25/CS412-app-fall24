@@ -15,6 +15,8 @@ urlpatterns = [
     path('org/<int:pk>/', OrgProfileView.as_view(), name='org'),
     path('post-item/', views.post_item_view, name='post_item'),
     path('search/', SearchView.as_view(), name='search'),
+    path('', HomePageView.as_view(), name='home'),
+
 
      # Inventory URLs
     path('inventory/create/', CreateInventoryItemView.as_view(), name='create_inventory_item'),

@@ -1,53 +1,231 @@
-/* styles.css */
+:root {
+    --prussian-blue: hsla(202, 77%, 19%, 1);
+    --cambridge-blue: hsla(204, 22%, 53%, 1);
+    --cherry-blossom-pink: hsla(342, 78%, 82%, 1);
+    --light-blue: hsla(198, 40%, 76%, 1);
+    --platinum: hsla(0, 0%, 89%, 1);
+    --dark-pink: hsla(342, 60%, 68%, 1);
+    --primary: var(--cambridge-blue);
+    --secondary: var(--light-blue);
+    --accent: var(--cherry-blossom-pink);
+}
+*{
+    font-family: "Times New Roman", Times, serif;
+}
+
+.banner-nav p{
+    font-family: Brush Script MT, Cursive, sans-serif;
+    text-align: center;
+    margin-bottom:auto;
+    margin-top: auto;
+    font-size: 80px;
+    text-shadow: #FC0 1px 0 10px;
+}
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: var(--platinum);
+    color: var(--prussian-blue);
 }
 
 header {
-    background-color: #333;
+    background-color: var(--prussian-blue);
     color: white;
+    text-align: center;
     padding: 1rem 0;
+}
+/* base.html nav */
+
+nav {
+    background-color: var(--prussian-blue);
+    padding: 1rem;
     text-align: center;
 }
 
 nav ul {
     list-style: none;
+    display: flex;
+    justify-content: space-between;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
+    text-align: center;
+
+}
+nav a{
+    text-align: center;
+
+}
+nav ul li {
+    margin-right: 1rem;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+
 }
 
-main {
-    padding: 2rem;
+nav ul li a:hover {
+    color: var(--cambridge-blue);
 }
 
-.inventory-grid, .browse-grid, .orders-grid {
+
+
+.banner-nav {
+    background-image: url("https://cs-people.bu.edu/grace25/Converge.png");
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    padding: 2rem 0;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 200px;
+}
+
+/* Dropdown Menu as Secondary Bar */
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown:hover .dropdown-content {
+    display: flex;
+}
+
+.dropdown-content {
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--platinum);
+    width: 100%; /* Ensures dropdown spans the full width of the parent */
+    padding: 0.5rem;
+    position: absolute;
+    top: 100%; /* Position directly below the main nav */
+    left: 0; /* Align dropdown with the left edge of the parent */
+    border-top: 2px solid var(--accent);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    overflow-x: auto; /* Allow horizontal scrolling if content overflows */
+}
+
+.dropdown-content a {
+    color: var(--prussian-blue);
+    text-decoration: none;
+    padding: 0.5rem;
+    font-weight: normal;
+    flex-grow: 1;
+    text-align: center;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.dropdown-content a:hover {
+    background-color: var(--cambridge-blue);
+    color: white;
+}
+
+/* Dropdown Trigger Styling */
+.nav-dropdown .nav-menu {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.nav-dropdown .dropdown-icon {
+    font-size: 0.8rem;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+/* Add Responsiveness */
+@media screen and (max-width: 768px) {
+    .dropdown-content {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        width: auto; /* Ensure proper sizing on narrow screens */
+    }
+}
+
+/* Cards and Common Components */
+.card-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1rem;
+    margin: 1rem 0;
+    padding: 10px;
 }
 
-.inventory-item, .rental-item, .order-item {
-    border: 1px solid #ccc;
-    padding: 1rem;
+.card {
+    background-color: white;
+    border: 1px solid var(--secondary);
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* prof page */
+.card a {
+    color: var(--dark-pink);
+    text-decoration: none;
+}
+
+.card a:hover {
+    color: var(--light-blue);
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Accent Headers */
+.section-header {
+    background-color: var(--primary);
+    color: white;
+    padding: 0.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+}
+
+/* Buttons */
+button, .btn-primary, .btn-secondary {
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button, .btn-primary {
+    background-color: var(--cambridge-blue);
+    color: white;
+}
+
+button:hover, .btn-primary:hover {
+    background-color: var(--prussian-blue);
+}
+
+.btn-secondary {
+    background-color: var(--light-blue);
+    color: var(--prussian-blue);
+}
+
+.btn-secondary:hover {
+    background-color: var(--cherry-blossom-pink);
+}
+
+/* Profile Styling */
 .profile-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 2rem;
+    background-color: var(--platinum);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .profile-image {
@@ -56,28 +234,21 @@ main {
     border-radius: 50%;
     display: block;
     margin-bottom: 1rem;
+    border: 3px solid var(--cambridge-blue);
 }
 
-.status-messages {
-    margin-top: 2rem;
-}
-
-.status {
-    margin-bottom: 1rem;
+/* Hover Effects for Items */
+.inventory-item, .rental-item, .order-item {
+    border: 1px solid var(--light-blue);
     padding: 1rem;
-    border: 1px solid #ccc;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
-.status-images {
-    margin-top: 0.5rem;
-}
-
-.status-image {
-    width: 100px;
-    height: 100px;
-    margin-right: 0.5rem;
-    border-radius: 4px;
-    object-fit: cover;
+.inventory-item:hover, .rental-item:hover, .order-item:hover {
+    background-color: var(--light-blue);
+    border-color: var(--cambridge-blue);
+    transform: translateY(-3px);
 }

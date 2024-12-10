@@ -5,9 +5,9 @@
 {% if request.org == org %}
     <a href="{% url 'create_inventory_item' %}" class="btn btn-primary">Create Inventory Item</a>
 {% endif %}
-<div class="inventory-grid">
+<div class="card-container">
     {% for item in inventory_items %}
-    <div class="inventory-item">
+    <div class="card">
         <h2>{{ item.name }}</h2>
         <p>{{ item.description }}</p>
         <p>Type: {{ item.item_type }}</p>

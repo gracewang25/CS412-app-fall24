@@ -73,8 +73,7 @@ MIDDLEWARE = [
     
 ]
 
-LOGIN_URL = '/mini_fb/login/'
-
+LOGIN_URL = '/project/login/'
 ROOT_URLCONF = 'cs412.urls'
 
 TEMPLATES = [

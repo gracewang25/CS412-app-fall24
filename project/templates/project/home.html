@@ -1,0 +1,76 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<div class="home-container">
+    <h1 class="text-center">Welcome to Converge!</h1>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="section-header bg-primary text-white text-center py-3">
+            <h2 class="banner">About Us</h2>
+        </div>
+        <div class="about-content py-4 px-3">
+            <p>Converge is a platform designed to simplify inventory sharing and rental between organizations. Whether you’re a theater group looking for costumes, a club in need of props, or just want to make the most of unused inventory, our site is here to help. By connecting users through an intuitive interface, we aim to foster collaboration, save resources, and reduce waste.</p>
+            <p>Created by BU Verge Dance Company, this app was inspired by our annual cross-cultural school showcase: Converge.</p>
+            <p>Our mission is to make sharing easy, efficient, and eco-friendly. 
+                This platform is specifically designed for collegiate dance and cultural clubs, supporting their drive to create bigger and better productions.
+                Thank you for being part of our community!</p>
+        </div>
+    </section>
+
+    <!-- Directions Section -->
+    <section class="directions">
+        <div class="section-header bg-secondary text-white text-center py-3">
+            <h2 class="banner">How to Use the Site</h2>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <h3>Browse Items</h3>
+                <p>Explore available inventory items from different organizations on the <a href="{% url 'browse' %}">Browse</a> page.</p>
+            </div>
+            <div class="card">
+                <h3>Search for Items</h3>
+                <p>Filter items by organization, type, size, or price range using the <a href="{% url 'search' %}">Search</a> page.</p>
+            </div>
+            <div class="card">
+                <h3>Post an Item</h3>
+                <p>Have items to share? Add your inventory to the system on the <a href="{% url 'post_item' %}">Post Item</a> page.</p>
+            </div>
+            <div class="card">
+                <h3>Manage Inventory</h3>
+                <p>View and update your posted items on the <a href="{% url 'inventory' %}">Inventory</a> page.</p>
+            </div>
+            <div class="card">
+                {% if user.is_authenticated %}
+                <p>Check out other organizations' profiles and manage your friends list on the <a href="{% url 'org' request.user.org.id %}">Organization</a> page.</p>
+            {% else %}
+                <p><a href="{% url 'login' %}">Log in</a> first to view and manage your friends and organizations.</p>
+            {% endif %}
+            </div>
+            <div class="card">
+                <h3>Orders</h3>
+                <p>Manage your rentals and purchases on the <a href="{% url 'orders' %}">Orders</a> page.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Rent Section -->
+    <section class="how-to-rent">
+        <div class="section-header bg-accent text-white text-center py-3">
+            <h2 class="banner">How to Rent an Item</h2>
+        </div>
+        <ol>
+            <li><strong>Choose Your Item:</strong> Browse or search for an item that suits your needs. Click on the "Rent" button to start the rental process.</li>
+            <li><strong>Pick Sizes and Quantities:</strong> If the item has sizes (e.g., XS, S, M, L, XL), select the quantities you need for each size. If it's a prop, just choose the total quantity.</li>
+            <li><strong>Payment:</strong> Rentals are honor-based and managed via Venmo. Use the organization's Venmo username displayed on the checkout page. 
+                Please confirm with the recipient to make sure your payment has gone through before confirming your order!</li>
+            <li><strong>Order Completion:</strong> Once the rental period is over:
+                <ul>
+                    <li><strong>As the Renter:</strong> Orders will be marked as overdue until they are returned to the seller.</li>
+                    <li><strong>As the Seller:</strong> Ensure the item is returned in good condition and mark the order as complete to finalize the transaction.</li>
+                </ul>
+            </li>
+        </ol>
+    </section>
+</div>
+{% endblock %}
