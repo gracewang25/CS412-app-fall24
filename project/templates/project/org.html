@@ -15,6 +15,8 @@
     <h2>About</h2>
     <p>{{ org.description }}</p>
 
+    <a href="{% url 'org_update' org.id %}">Edit Organization</a>
+
     <h2>Status Messages</h2>
     <div class="status-messages">
         {% for status in status_messages %}
@@ -23,6 +25,8 @@
             <div class="status-images">
                 {% for image in status.get_images %}
                 <img src="{{ image.image_file.url }}" alt="Status Image" class="status-image">
+                <a href="{% url 'status_update' status.id %}">Edit</a>
+                <a href="{% url 'status_delete' status.id %}">Delete</a>
                 {% endfor %}
             </div>
         </div>

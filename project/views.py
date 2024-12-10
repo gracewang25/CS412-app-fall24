@@ -11,6 +11,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import redirect, get_object_or_404, render
 from django.contrib.auth.decorators import login_required
+from django.views.generic import UpdateView, DeleteView
+from django.urls import reverse_lazy
+from django.core.exceptions import PermissionDenied
+
 
 from django import template
 from .forms import *
@@ -193,3 +197,64 @@ def checkout_view(request, rental_id):
         'total_cost': total_cost,
         'seller_venmo': seller_venmo,
     })
+
+
+# Update Organization Profile
+class OrgUpdateView(UpdateView):
+    model = Org
+    fields = ['name', 'profile_picture', 'venmo_username', 'description']  # Add relevant fields
+    template_name = 'project/org_update.html'
+
+    def get_success_url(self):
+        return reverse_lazy('org', kwargs={'pk': self.object.id})
+
+    def get_object(self, queryset=None):
+        org = super().get_object(queryset)
+        if org.user != self.request.user:
+            raise PermissionDenied("You cannot edit this organization.")
+        return org
+
+# Update Inventory Item
+class InventoryItemUpdateView(UpdateView):
+    model = InventoryItem
+    fields = ['name', 'description', 'item_type', 'pricing_per_unit', 'size_s', 'size_m', 'size_l', 'size_xl', 'prop', 'usage_type', 'image']
+    template_name = 'project/item_update.html'
+
+    def get_success_url(self):
+        return reverse_lazy('inventory')
+
+    def get_object(self, queryset=None):
+        item = super().get_object(queryset)
+        if item.org != self.request.user.org:
+            raise PermissionDenied("You cannot edit items from other organizations.")
+        return item
+
+# Delete Inventory Item
+class InventoryItemDeleteView(DeleteView):
+    model = InventoryItem
+    template_name = 'project/item_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('inventory')
+
+    def get_object(self, queryset=None):
+        item = super().get_object(queryset)
+        if item.org != self.request.user.org:
+            raise PermissionDenied("You cannot delete items from other organizations.")
+        return item
+
+# Update and Delete Status Messages
+class StatusMessageUpdateView(UpdateView):
+    model = StatusMessage
+    fields = ['content']  # Include relevant fields
+    template_name = 'project/status_update.html'
+
+    def get_success_url(self):
+        return reverse_lazy('org', kwargs={'pk': self.object.org.id})
+
+class StatusMessageDeleteView(DeleteView):
+    model = StatusMessage
+    template_name = 'project/status_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('org', kwargs={'pk': self.object.org.id})

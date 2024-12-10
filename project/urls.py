@@ -17,4 +17,14 @@ urlpatterns = [
 
     path('checkout/<int:rental_id>/', checkout_view, name='checkout'),
 
+    # Org Update
+    path('org/<int:pk>/update/', OrgUpdateView.as_view(), name='org_update'),
+
+    # Inventory Item Update and Delete
+    path('inventory/<int:pk>/update/', InventoryItemUpdateView.as_view(), name='item_update'),
+    path('inventory/<int:pk>/delete/', InventoryItemDeleteView.as_view(), name='item_delete'),
+
+    # Status Message Update and Delete
+    path('status/<int:pk>/update/', StatusMessageUpdateView.as_view(), name='status_update'),
+    path('status/<int:pk>/delete/', StatusMessageDeleteView.as_view(), name='status_delete'),
 ]
