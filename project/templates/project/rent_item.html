@@ -26,6 +26,11 @@
 <!-- Rent Form -->
 <form method="post" id="rentForm">
     {% csrf_token %}
+    <label for="rental_date">Rental Start Date:</label>
+    <input type="date" id="rental_date" name="rental_date" required>
+
+    <label for="return_date">Rental End Date:</label>
+    <input type="date" id="return_date" name="return_date" required>
     <table>
         <thead>
             <tr>
@@ -98,6 +103,7 @@
 
     <h3>Total Cost: $<span id="totalCost">0</span></h3>
     <button type="submit">Proceed to Checkout</button>
+    <a href="{% url 'browse' %}" class="btn btn-secondary">Back to Browse</a>
 </form>
 
 <script>

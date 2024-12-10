@@ -26,13 +26,6 @@ class Org(models.Model):
     def __str__(self):
         return self.name
 
-    def get_status_messages(self):
-        # Convert timestamps to EST (Eastern Standard Time)
-        est_tz = pytz.timezone('America/New_York')
-        status_messages = self.status_messages.order_by('-timestamp')
-        for status in status_messages:
-            status.timestamp = status.timestamp.astimezone(est_tz)
-        return status_messages
 
     def get_friends(self):
         friends1 = Friend.objects.filter(org1=self).values_list('org2', flat=True)
@@ -52,27 +45,6 @@ class Org(models.Model):
         """Returns a list of orgs not friends with self and excludes self."""
         current_friends = self.get_friends().values_list('id', flat=True)
         return Org.objects.exclude(id__in=current_friends).exclude(id=self.id)
-    
-class StatusMessage(models.Model):
-    """Models the data attributes of Facebook status message."""
-    timestamp = models.DateTimeField(auto_now_add=True)
-    message = models.TextField()
-    org = models.ForeignKey(Org, on_delete=models.CASCADE, related_name='status_messages')
-
-    def __str__(self):
-        return f"{self.org.name}: {self.message[:30]}"
-
-    def get_images(self):
-        return Image.objects.filter(status_message=self)
-
-
-class Image(models.Model):
-    status_message = models.ForeignKey(StatusMessage, on_delete=models.CASCADE)
-    image_file = models.ImageField(upload_to='status_images/')
-    timestamp = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return f"Image for status {self.status_message.id} uploaded on {self.timestamp}"
 
 
 class Friend(models.Model):
@@ -111,9 +83,16 @@ class InventoryItem(models.Model):
     )
     image = models.ImageField(upload_to='item_images/', blank=True, null=True)  # New field
 
+    @property
+    def total_units(self):
+        """Calculate the total number of units."""
+        return self.prop + self.size_xs + self.size_s + self.size_m + self.size_l + self.size_xl
+
     def __str__(self):
         return self.name
 
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 class Rental(models.Model):
     RENTAL_STATUS_CHOICES = [
@@ -129,12 +108,38 @@ class Rental(models.Model):
         Org, related_name='items_bought', on_delete=models.CASCADE, null=True, blank=True
     )
     item = models.ForeignKey('InventoryItem', related_name='rentals', on_delete=models.CASCADE)
-    duration = models.PositiveIntegerField()  # in days
+    rental_date = models.DateField()  # User-specified start date
+    return_date = models.DateField(null=True, blank=True)  # User-specified end date
+    duration = models.PositiveIntegerField(null=True, blank=True)  # Automatically calculated
     total_cost = models.DecimalField(max_digits=10, decimal_places=2)
-    rental_date = models.DateField(auto_now_add=True)
-    return_date = models.DateField(null=True, blank=True)
     rental_status = models.CharField(max_length=20, choices=RENTAL_STATUS_CHOICES)
 
+    def is_overdue(self):
+        """Check if the rental is overdue."""
+        if self.return_date and self.rental_status == 'active':
+            return timezone.now().date() > self.return_date
+        return False
+
+    def mark_as_overdue(self):
+        """Mark the rental as overdue."""
+        if self.is_overdue():
+            self.rental_status = 'overdue'
+            self.save()
+
+    def is_available(self):
+        """Check if the rental item should be available for browsing."""
+        if self.rental_status == 'completed':
+            return True  # Completed rentals make items available
+        if self.return_date:
+            return timezone.now().date() > self.return_date + timezone.timedelta(days=5)
+        return False
+
     def __str__(self):
-        return f"Rental ID: {self.id} - Item: {self.item.name} ( Seller: {self.seller} -> Buyer: {self.buyer})"
-    
+        return f"Rental ID: {self.id} - Item: {self.item.name} (Seller: {self.seller} -> Buyer: {self.buyer})"
+
+
+@receiver(pre_save, sender=Rental)
+def calculate_duration(sender, instance, **kwargs):
+    """Automatically calculate the duration based on rental and return dates."""
+    if instance.rental_date and instance.return_date:
+        instance.duration = (instance.return_date - instance.rental_date).days

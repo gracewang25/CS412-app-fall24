@@ -1,31 +1,80 @@
-{% extends 'project/base.html' %}
+{% extends "project/base.html" %}
 
 {% block content %}
 <h1>Orders</h1>
 
-<h2>Orders in Progress</h2>
-<div class="orders-grid">
+<h2>Buying Orders</h2>
+
+<h3>In Progress Orders</h3>
+<div class="orders-section">
     {% for order in in_progress_orders %}
-    <div class="order-item">
-        <h3>{{ order.item.name }}</h3>
-        <p>{{ order.organization.name }}</p>
-        <p>Rental Duration: {{ order.duration }} days</p>
-        <p>Total Cost: ${{ order.total_cost }}</p>
-        <p>Status: {{ order.rental_status }}</p>
+    <div class="order">
+        <p><strong>Item:</strong> {{ order.item.name }}</p>
+        <p><strong>Rental Date:</strong> {{ order.rental_date }}</p>
+        <p><strong>Return Date:</strong> {{ order.return_date }}</p>
+        <p><strong>Status:</strong> {{ order.rental_status }}</p>
+
+        {% if order.is_overdue %}
+        <p class="text-danger"><strong>This rental is overdue!</strong></p>
+        {% endif %}
     </div>
+    {% empty %}
+    <p>No in-progress orders as a buyer.</p>
     {% endfor %}
 </div>
 
-<h2>Previous Orders</h2>
-<div class="orders-grid">
+<h3>Completed Orders</h3>
+<div class="orders-section">
     {% for order in completed_orders %}
-    <div class="order-item">
-        <h3>{{ order.item.name }}</h3>
-        <p>{{ order.organization.name }}</p>
-        <p>Rental Duration: {{ order.duration }} days</p>
-        <p>Total Cost: ${{ order.total_cost }}</p>
-        <p>Return Date: {{ order.return_date }}</p>
+    <div class="order completed">
+        <p><strong>Item:</strong> {{ order.item.name }}</p>
+        <p><strong>Rental Date:</strong> {{ order.rental_date }}</p>
+        <p><strong>Return Date:</strong> {{ order.return_date }}</p>
+        <p><strong>Status:</strong> {{ order.rental_status }}</p>
     </div>
+    {% empty %}
+    <p>No completed orders as a buyer.</p>
+    {% endfor %}
+</div>
+
+<h2>Selling Orders</h2>
+
+<h3>In Progress Orders</h3>
+<div class="orders-section">
+    {% for order in selling_orders_in_progress %}
+    <div class="order">
+        <p><strong>Item:</strong> {{ order.item.name }}</p>
+        <p><strong>Rental Date:</strong> {{ order.rental_date }}</p>
+        <p><strong>Return Date:</strong> {{ order.return_date }}</p>
+        <p><strong>Status:</strong> {{ order.rental_status }}</p>
+
+        {% if order.is_overdue %}
+        <p class="text-danger"><strong>This rental is overdue!</strong></p>
+        {% endif %}
+
+        {% if order.seller == request.user.org %}
+        <form method="POST" action="{% url 'complete_rental' order.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Complete Rental</button>
+        </form>
+        {% endif %}
+    </div>
+    {% empty %}
+    <p>No in-progress orders as a seller.</p>
+    {% endfor %}
+</div>
+
+<h3>Completed Orders</h3>
+<div class="orders-section">
+    {% for order in selling_orders_completed %}
+    <div class="order completed">
+        <p><strong>Item:</strong> {{ order.item.name }}</p>
+        <p><strong>Rental Date:</strong> {{ order.rental_date }}</p>
+        <p><strong>Return Date:</strong> {{ order.return_date }}</p>
+        <p><strong>Status:</strong> {{ order.rental_status }}</p>
+    </div>
+    {% empty %}
+    <p>No completed orders as a seller.</p>
     {% endfor %}
 </div>
 {% endblock %}

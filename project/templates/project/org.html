@@ -15,24 +15,34 @@
     <h2>About</h2>
     <p>{{ org.description }}</p>
 
-    <a href="{% url 'org_update' org.id %}">Edit Organization</a>
 
-    <h2>Status Messages</h2>
-    <div class="status-messages">
-        {% for status in status_messages %}
-        <div class="status">
-            <p><strong>{{ status.timestamp|date:"M d, Y H:i" }}:</strong> {{ status.message }}</p>
-            <div class="status-images">
-                {% for image in status.get_images %}
-                <img src="{{ image.image_file.url }}" alt="Status Image" class="status-image">
-                <a href="{% url 'status_update' status.id %}">Edit</a>
-                <a href="{% url 'status_delete' status.id %}">Delete</a>
-                {% endfor %}
-            </div>
-        </div>
+    {% if request.user == org.user %}
+        <a href="{% url 'update_profile' org.id %}" class="btn btn-primary">Edit Organization</a>
+    {% endif %}
+
+    <!-- Add Friend Button -->
+    {% if can_add_friend %}
+    <form action="{% url 'add_friend' org.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Add Friend</button>
+    </form>
+    {% endif %}
+
+    <!-- List of Friends -->
+    <h2>Friends</h2>
+    <ul>
+        {% for friend in org.get_friends %}
+            <li>
+                <a href="{% url 'org' friend.id %}">{{ friend.name }}</a>
+                <form method="post" action="{% url 'remove_friend' friend.id %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Remove Friend</button>
+                </form>
+            </li>
         {% empty %}
-        <p>No status messages to display.</p>
+            <li>No friends yet.</li>
         {% endfor %}
-    </div>
+    </ul>
+
 </div>
 {% endblock %}
