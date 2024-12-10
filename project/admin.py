@@ -10,3 +10,4 @@ admin.site.register(Image)
 admin.site.register(InventoryItem)
 admin.site.register(Rental)
 
+

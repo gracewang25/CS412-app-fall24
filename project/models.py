@@ -13,8 +13,10 @@ class Org(models.Model):
     name = models.TextField(blank=False)
     email = models.TextField(blank=False)
     location = models.TextField(blank=False)
-    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True)
+    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     description = models.TextField(blank=True)
+    venmo_username = models.TextField(blank=True)  # New field
+
     published = models.DateTimeField(auto_now=True)
 
 
@@ -94,13 +96,20 @@ class InventoryItem(models.Model):
     description = models.TextField()
     item_type = models.CharField(max_length=50, choices=ITEM_TYPES)
     # Size quantities
+    prop = models.PositiveIntegerField(default=0, verbose_name="Prop or Other Quantity")
+
     size_xs = models.PositiveIntegerField(default=0, verbose_name="Extra Small Quantity")
     size_s = models.PositiveIntegerField(default=0, verbose_name="Small Quantity")
     size_m = models.PositiveIntegerField(default=0, verbose_name="Medium Quantity")
     size_l = models.PositiveIntegerField(default=0, verbose_name="Large Quantity")
-    size_xl = models.PositiveIntegerField(default=0, verbose_name="Extra Large Quantity")    
-    
+    size_xl = models.PositiveIntegerField(default=0, verbose_name="Extra Large Quantity")
     pricing_per_unit = models.DecimalField(max_digits=10, decimal_places=2)
+    usage_type = models.CharField(
+        max_length=10,
+        choices=[('rent', 'For Rent'), ('storage', 'For Storage')],
+        default='storage',
+    )
+    image = models.ImageField(upload_to='item_images/', blank=True, null=True)  # New field
 
     def __str__(self):
         return self.name
@@ -128,3 +137,4 @@ class Rental(models.Model):
 
     def __str__(self):
         return f"Rental ID: {self.id} - Item: {self.item.name} ( Seller: {self.seller} -> Buyer: {self.buyer})"
+    

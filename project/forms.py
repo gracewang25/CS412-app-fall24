@@ -22,7 +22,7 @@ class UserRegistrationForm(forms.ModelForm):
 class OrgRegistrationForm(forms.ModelForm):
     class Meta:
         model = Org
-        fields = ['name', 'email', 'location', 'profile_picture', 'description']
+        fields = ['name', 'email', 'venmo_username', 'location', 'profile_picture', 'description']
 
 from django import forms
 from .models import InventoryItem
@@ -30,4 +30,7 @@ from .models import InventoryItem
 class InventoryItemForm(forms.ModelForm):
     class Meta:
         model = InventoryItem
-        fields = ['name', 'description', 'item_type', 'pricing_per_unit', 'size_s', 'size_m', 'size_l', 'size_xl']
+        fields = [
+            'name', 'description', 'item_type', 'prop', 'size_xs', 'size_s', 'size_m', 'size_l',
+            'size_xl', 'pricing_per_unit', 'usage_type', 'image'
+        ]

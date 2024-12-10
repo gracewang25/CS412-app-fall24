@@ -2,21 +2,127 @@
 
 {% block content %}
 <h1>Rent/Buy Item</h1>
+
+<!-- Item Details -->
 <p><strong>Name:</strong> {{ item.name }}</p>
 <p><strong>Description:</strong> {{ item.description }}</p>
 <p><strong>Price Per Unit:</strong> ${{ item.pricing_per_unit }}</p>
-<p><strong>Available Sizes:</strong></p>
-<ul>
-    <li>Small: {{ item.size_s }}</li>
-    <li>Medium: {{ item.size_m }}</li>
-    <li>Large: {{ item.size_l }}</li>
-    <li>Extra Large: {{ item.size_xl }}</li>
-</ul>
 
-<form method="post">
+<!-- Item Image -->
+{% if item.image %}
+    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="item-image">
+{% else %}
+    <p><em>No image available for this item.</em></p>
+{% endif %}
+
+<!-- Seller Details -->
+<p><strong>Seller:</strong> <a href="{% url 'org' item.org.id %}">{{ item.org.name }}</a></p>
+{% if item.org.profile_picture %}
+    <img src="{{ item.org.profile_picture.url }}" alt="{{ item.org.name }}'s Profile Picture" class="profile-picture">
+{% else %}
+    <p><em>No profile picture available for the seller.</em></p>
+{% endif %}
+
+<!-- Rent Form -->
+<form method="post" id="rentForm">
     {% csrf_token %}
-    <label for="duration">Duration (in days):</label>
-    <input type="number" id="duration" name="duration" value="1" min="1">
-    <button type="submit">Rent</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Size</th>
+                <th>Available Quantity</th>
+                <th>Select Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if item.item_type != "Prop" %}
+                <tr>
+                    <td>Small</td>
+                    <td>{{ item.size_s }}</td>
+                    <td>
+                        <select name="quantity_s" id="quantity_s" data-price="{{ item.pricing_per_unit }}">
+                            {% for i in size_s_range %}
+                                <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Medium</td>
+                    <td>{{ item.size_m }}</td>
+                    <td>
+                        <select name="quantity_m" id="quantity_m" data-price="{{ item.pricing_per_unit }}">
+                            {% for i in size_m_range %}
+                                <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Large</td>
+                    <td>{{ item.size_l }}</td>
+                    <td>
+                        <select name="quantity_l" id="quantity_l" data-price="{{ item.pricing_per_unit }}">
+                            {% for i in size_l_range %}
+                                <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Extra Large</td>
+                    <td>{{ item.size_xl }}</td>
+                    <td>
+                        <select name="quantity_xl" id="quantity_xl" data-price="{{ item.pricing_per_unit }}">
+                            {% for i in size_xl_range %}
+                                <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>Prop</td>
+                    <td>{{ item.prop }}</td>
+                    <td>
+                        <select name="prop" id="prop" data-price="{{ item.pricing_per_unit }}">
+                            {% for i in prop_range %}
+                                <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <h3>Total Cost: $<span id="totalCost">0</span></h3>
+    <button type="submit">Proceed to Checkout</button>
 </form>
+
+<script>
+    const form = document.getElementById('rentForm');
+    const totalCostElement = document.getElementById('totalCost');
+
+    // Function to calculate total cost
+    const calculateTotal = () => {
+        let total = 0;
+        const selects = form.querySelectorAll('select');
+        selects.forEach(select => {
+            const quantity = parseInt(select.value) || 0;
+            const price = parseFloat(select.getAttribute('data-price')) || 0;
+            total += quantity * price;
+        });
+        totalCostElement.innerText = total.toFixed(2);
+    };
+
+    // Add event listeners to dropdowns
+    const dropdowns = form.querySelectorAll('select');
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('change', calculateTotal);
+    });
+
+    // Initial calculation
+    calculateTotal();
+</script>
 {% endblock %}

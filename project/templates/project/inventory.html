@@ -9,11 +9,24 @@
         <p>{{ item.description }}</p>
         <p>Type: {{ item.item_type }}</p>
         <p>Price per Unit: ${{ item.pricing_per_unit }}</p>
-        <p>Sizes: 
-            {% for size, quantity in item.available_sizes.items %}
-                {{ size }} ({{ quantity }}),
-            {% endfor %}
-        </p>
+
+        {% if item.item_type == "Prop" %}
+            <p>Quantity: {{ item.prop }}</p>
+        {% else %}
+            <p>Sizes: 
+                Extra Small: {{ item.size_xs }},
+                Small: {{ item.size_s }},
+                Medium: {{ item.size_m }},
+                Large: {{ item.size_l }},
+                Extra Large: {{ item.size_xl }}
+            </p>
+        {% endif %}
+
+        {% if item.image %}
+            <img src="{{ item.image.url }}" alt="Item Image" class="item-image">
+        {% else %}
+            <p><em>No image available for this item.</em></p>
+        {% endif %}
     </div>
     {% endfor %}
 </div>

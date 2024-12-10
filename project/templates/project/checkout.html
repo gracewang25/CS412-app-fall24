@@ -1,0 +1,43 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h1>Checkout</h1>
+
+<h2>Itemized List</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Price Per Unit</th>
+            <th>Duration (days)</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>1</td>
+            <td>${{ item.pricing_per_unit }}</td>
+            <td>{{ rental.duration }}</td>
+            <td>${{ total_cost }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Total Cost: ${{ total_cost }}</h3>
+
+<h2>Pay with Venmo</h2>
+<p>Send the payment to the seller's Venmo account:</p>
+<p><strong>Venmo Username:</strong> @{{ seller_venmo }}</p>
+<p><em>Please confirm the payment with the seller.</em></p>
+
+<!-- Payment Confirmation Form -->
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" name="payment_method" value="confirm_payment">Payment Confirmed!</button>
+</form>
+
+{% endblock %}
