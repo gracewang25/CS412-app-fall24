@@ -4,7 +4,7 @@
 <div class="org-container">
     <h1>{{ org.name }}</h1>
     {% if org.profile_picture %}
-        <img src="{{ org.profile_picture.url }}" alt="{{ org.name }}'s Profile Picture" class="org-image">
+        <img src="{{ org.profile_picture.url }}" alt="{{ org.name }}'s Profile Picture" class="profile-image">
     {% else %}
         <p><em>No profile picture available.</em></p>
     {% endif %}
@@ -15,7 +15,6 @@
     <h2>About</h2>
     <p>{{ org.description }}</p>
 
-
     {% if request.user == org.user %}
         <a href="{% url 'update_profile' org.id %}" class="btn btn-primary">Edit Organization</a>
     {% endif %}
@@ -24,15 +23,15 @@
     {% if can_add_friend %}
     <form action="{% url 'add_friend' org.id %}" method="post">
         {% csrf_token %}
-        <button type="submit">Add Friend</button>
+        <button type="submit" class="btn btn-primary">Add Friend</button>
     </form>
     {% endif %}
 
     <!-- List of Friends -->
     <h2>Friends</h2>
-    <ul>
+    <ul class="friends-list">
         {% for friend in org.get_friends %}
-            <li>
+            <li class="friend-item">
                 <a href="{% url 'org' friend.id %}">{{ friend.name }}</a>
                 <form method="post" action="{% url 'remove_friend' friend.id %}" style="display: inline;">
                     {% csrf_token %}
@@ -43,6 +42,5 @@
             <li>No friends yet.</li>
         {% endfor %}
     </ul>
-
 </div>
 {% endblock %}

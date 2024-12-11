@@ -187,6 +187,7 @@ button, .btn-primary, .btn-secondary {
     border-radius: 5px;
     font-size: 1rem;
     cursor: pointer;
+    text-decoration: none;
 }
 
 button, .btn-primary {
@@ -201,6 +202,7 @@ button:hover, .btn-primary:hover {
 .btn-secondary {
     background-color: var(--light-blue);
     color: var(--prussian-blue);
+    text-decoration: none;
 }
 
 .btn-secondary:hover {
@@ -335,4 +337,57 @@ form .form-buttons button:hover {
 .order-card:hover {
     transform: scale(1.03);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* profile page styling */
+/* Profile Styling */
+.org-container{
+    padding:20px
+}
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 1rem;
+    border: 3px solid var(--cambridge-blue);
+    object-fit: cover;
+}
+
+/* Card Styling */
+.card img, .order-card img, .inventory-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+}
+
+/* Friends List */
+.friends-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.friend-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--light-blue);
+    border-radius: 5px;
+    background-color: var(--platinum);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.5rem;
+}
+
+.friend-item a {
+    color: var(--prussian-blue);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.friend-item a:hover {
+    color: var(--dark-pink);
 }

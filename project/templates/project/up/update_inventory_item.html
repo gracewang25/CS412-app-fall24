@@ -1,68 +1,74 @@
 {% extends 'project/base.html' %}
 
 {% block content %}
-<h1>Update Inventory Item</h1>
+<div class="form-container">
+    <h1 class="section-header">Update Inventory Item</h1>
 
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
+    <form method="POST" enctype="multipart/form-data" class="glow-form">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
 
-    <p>
-        <label for="id_name">Name:</label>
-        {{ form.name }}
-    </p>
-    <p>
-        <label for="id_description">Description:</label>
-        {{ form.description }}
-    </p>
-    <p>
-        <label for="id_item_type">Type:</label>
-        {{ form.item_type }}
-    </p>
-    <p>
-        <label for="id_usage_type">Usage:</label>
-        {{ form.usage_type }}
-    </p>
-    <p>
-        <label for="id_pricing_per_unit">Price per Unit:</label>
-        {{ form.pricing_per_unit }}
-    </p>
+        <table>
+            <tr>
+                <td><label for="id_name">Name:</label></td>
+                <td>{{ form.name }}</td>
+            </tr>
+            <tr>
+                <td><label for="id_description">Description:</label></td>
+                <td>{{ form.description }}</td>
+            </tr>
+            <tr>
+                <td><label for="id_item_type">Type:</label></td>
+                <td>{{ form.item_type }}</td>
+            </tr>
+            <tr>
+                <td><label for="id_usage_type">Usage:</label></td>
+                <td>{{ form.usage_type }}</td>
+            </tr>
+            <tr>
+                <td><label for="id_pricing_per_unit">Price per Unit:</label></td>
+                <td>{{ form.pricing_per_unit }}</td>
+            </tr>
 
-    <!-- Conditional logic for displaying fields -->
-    {% if form.initial.item_type == "Prop" %}
-        <p>
-            <label for="id_prop">Quantity:</label>
-            {{ form.prop }}
-        </p>
-    {% else %}
-        <p>
-            <label for="id_size_xs">Extra Small Quantity:</label>
-            {{ form.size_xs }}
-        </p>
-        <p>
-            <label for="id_size_s">Small Quantity:</label>
-            {{ form.size_s }}
-        </p>
-        <p>
-            <label for="id_size_m">Medium Quantity:</label>
-            {{ form.size_m }}
-        </p>
-        <p>
-            <label for="id_size_l">Large Quantity:</label>
-            {{ form.size_l }}
-        </p>
-        <p>
-            <label for="id_size_xl">Extra Large Quantity:</label>
-            {{ form.size_xl }}
-        </p>
-    {% endif %}
+            <!-- Conditional logic for displaying fields -->
+            {% if form.initial.item_type == "Prop" %}
+            <tr>
+                <td><label for="id_prop">Quantity:</label></td>
+                <td>{{ form.prop }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td><label for="id_size_xs">Extra Small Quantity:</label></td>
+                <td>{{ form.size_xs }}</td>
+            </tr>
+            <tr>
+                <td><label for="id_size_s">Small Quantity:</label></td>
+                <td>{{ form.size_s }}</td>
+            </tr>
+            <tr>
+                <td><label for="id_size_m">Medium Quantity:</label></td>
+                <td>{{ form.size_m }}</td>
+            </tr>
+            <tr>
+                <td><label for="id_size_l">Large Quantity:</label></td>
+                <td>{{ form.size_l }}</td>
+            </tr>
+            <tr>
+                <td><label for="id_size_xl">Extra Large Quantity:</label></td>
+                <td>{{ form.size_xl }}</td>
+            </tr>
+            {% endif %}
 
-    <p>
-        <label for="id_image">Image:</label>
-        {{ form.image }}
-    </p>
+            <tr>
+                <td><label for="id_image">Image:</label></td>
+                <td>{{ form.image }}</td>
+            </tr>
+        </table>
 
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a href="{% url 'inventory' %}" class="btn btn-secondary">Cancel</a>
-</form>
+        <div class="form-buttons">
+            <button type="submit" class="btn-primary">Update</button>
+            <a href="{% url 'inventory' %}" class="btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

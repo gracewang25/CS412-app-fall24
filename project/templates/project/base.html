@@ -37,13 +37,13 @@
 
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'browse' %}">Browse</a></li>
-                <li><a href="{% url 'orders' %}">Orders</a></li>
+                <li><a href="{% url 'inventory' %}">Inventory</a></li>
                 <li>
                     <button type="button" class="collapsible" id="col-btn">More Options</button>
                     <div class="content">
                         <ul>
                             <li><a href="{% url 'post_item' %}">Post Item</a></li>
-                            <li><a href="{% url 'inventory' %}">Inventory</a></li>
+                            <li><a href="{% url 'orders' %}">Orders</a></li>
                             <li><a href="{% url 'search' %}">Search</a></li>
                         </ul>
                     </div>

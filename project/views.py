@@ -283,11 +283,11 @@ def rent_item_view(request, item_id):
         return redirect('browse')
 
     # Prepare ranges for dropdowns in the template
-    size_s_range = range(1, item.size_s + 1) if item.size_s else range(1)
-    size_m_range = range(1, item.size_m + 1) if item.size_m else range(1)
-    size_l_range = range(1, item.size_l + 1) if item.size_l else range(1)
-    size_xl_range = range(1, item.size_xl + 1) if item.size_xl else range(1)
-    prop_range = range(1, item.prop + 1) if item.prop else range(1)
+    size_s_range = range(0, item.size_s + 1) if item.size_s else range(1)
+    size_m_range = range(0, item.size_m + 1) if item.size_m else range(1)
+    size_l_range = range(0, item.size_l + 1) if item.size_l else range(1)
+    size_xl_range = range(0, item.size_xl + 1) if item.size_xl else range(1)
+    prop_range = range(0, item.prop + 1) if item.prop else range(1)
 
     if request.method == "POST":
         # Get rental start and end dates
