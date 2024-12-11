@@ -1,7 +1,7 @@
 {% extends 'project/base.html' %}
 
 {% block content %}
-<div class="org-container">
+<div class="org-container" >
     <h1>{{ org.name }}</h1>
     {% if org.profile_picture %}
         <img src="{{ org.profile_picture.url }}" alt="{{ org.name }}'s Profile Picture" class="profile-image">
