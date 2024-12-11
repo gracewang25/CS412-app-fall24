@@ -7,6 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Converge</title>
     <link rel="stylesheet" href="{% static 'proj-styles.css' %}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var coll = document.getElementsByClassName("collapsible");
+            for (var i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                        content.style.display = "block";
+                    }
+                });
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="banner-nav">
@@ -16,18 +32,20 @@
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'inventory' %}">Inventory</a></li>
-                <li><a href="{% url 'browse' %}">Browse</a></li>
-                <li><a href="{% url 'orders' %}">Orders</a></li>
+                <li><a href="{% url 'org' request.user.org.id %}">My Org</a></li>
+
 
                 {% if user.is_authenticated %}
-                <li class="nav-dropdown">
-                    <a href="#" class="nav-menu"><span class="dropdown-icon">▼</span></a>
-                    <div class="dropdown-content">
-                        <a href="{% url 'logout' %}">Logout</a>
-                        <a href="{% url 'search' %}">Search</a>
-                        <a href="{% url 'post_item' %}">Post Item</a>
-                        <a href="{% url 'org' request.user.org.id %}">My Org</a>
+                <li><a href="{% url 'browse' %}">Browse</a></li>
+                <li><a href="{% url 'orders' %}">Orders</a></li>
+                <li>
+                    <button type="button" class="collapsible" id="col-btn">More Options</button>
+                    <div class="content">
+                        <ul>
+                            <li><a href="{% url 'post_item' %}">Post Item</a></li>
+                            <li><a href="{% url 'inventory' %}">Inventory</a></li>
+                            <li><a href="{% url 'search' %}">Search</a></li>
+                        </ul>
                     </div>
                 </li>
                 {% else %}

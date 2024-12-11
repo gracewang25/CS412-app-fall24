@@ -1,61 +1,92 @@
 {% extends 'project/base.html' %}
 
 {% block content %}
-<h1>Search Rentals</h1>
+<h1 style="text-align: center;">Search Rentals</h1>
 
 <!-- Filter Form -->
 <form method="get" class="filter-form">
-    <label for="org_id">Filter by Organization:</label>
-    <select name="org_id" id="org_id">
-        <option value="">All Organizations</option>
-        {% for org in orgs %}
-            <option value="{{ org.id }}" {% if request.GET.org_id == org.id|stringformat:"s" %}selected{% endif %}>
-                {{ org.name }}
-            </option>
-        {% endfor %}
-    </select>
-
-    <label for="item_type">Filter by Item Type:</label>
-    <select name="item_type" id="item_type">
-        <option value="">All Types</option>
-        {% for key, value in item_types.items %}
-            <option value="{{ key }}" {% if request.GET.item_type == key %}selected{% endif %}>{{ value }}</option>
-        {% endfor %}
-    </select>
-
-    <label for="size">Filter by Size:</label>
-    <select name="size" id="size">
-        <option value="">All Sizes</option>
-        <option value="XS" {% if request.GET.size == "XS" %}selected{% endif %}>XS</option>
-        <option value="S" {% if request.GET.size == "S" %}selected{% endif %}>S</option>
-        <option value="M" {% if request.GET.size == "M" %}selected{% endif %}>M</option>
-        <option value="L" {% if request.GET.size == "L" %}selected{% endif %}>L</option>
-        <option value="XL" {% if request.GET.size == "XL" %}selected{% endif %}>XL</option>
-    </select>
-
-    <label for="min_units">Minimum Units:</label>
-    <input type="number" name="min_units" id="min_units" value="{{ request.GET.min_units|default:'' }}">
-
-    <label for="max_units">Maximum Units:</label>
-    <input type="number" name="max_units" id="max_units" value="{{ request.GET.max_units|default:'' }}">
-
-    <label for="min_price">Minimum Price:</label>
-    <input type="number" step="0.01" name="min_price" id="min_price" value="{{ request.GET.min_price|default:'' }}">
-
-    <label for="max_price">Maximum Price:</label>
-    <input type="number" step="0.01" name="max_price" id="max_price" value="{{ request.GET.max_price|default:'' }}">
-
-    <label for="prop">Props Only:</label>
-    <input type="checkbox" name="prop" id="prop" {% if request.GET.prop %}checked{% endif %}>
-
-    <button type="submit">Apply Filters</button>
+    <table>
+        <tr>
+            <td><label for="org_id">Filter by Organization:</label></td>
+            <td>
+                <select name="org_id" id="org_id">
+                    <option value="">All Organizations</option>
+                    {% for org in orgs %}
+                        <option value="{{ org.id }}" {% if request.GET.org_id == org.id|stringformat:"s" %}selected{% endif %}>
+                            {{ org.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="item_type">Filter by Item Type:</label></td>
+            <td>
+                <select name="item_type" id="item_type">
+                    <option value="">All Types</option>
+                    {% for key, value in item_types.items %}
+                        <option value="{{ key }}" {% if request.GET.item_type == key %}selected{% endif %}>{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="size">Filter by Size:</label></td>
+            <td>
+                <select name="size" id="size">
+                    <option value="">All Sizes</option>
+                    <option value="XS" {% if request.GET.size == "XS" %}selected{% endif %}>XS</option>
+                    <option value="S" {% if request.GET.size == "S" %}selected{% endif %}>S</option>
+                    <option value="M" {% if request.GET.size == "M" %}selected{% endif %}>M</option>
+                    <option value="L" {% if request.GET.size == "L" %}selected{% endif %}>L</option>
+                    <option value="XL" {% if request.GET.size == "XL" %}selected{% endif %}>XL</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="min_units">Minimum Units:</label></td>
+            <td>
+                <input type="number" name="min_units" id="min_units" value="{{ request.GET.min_units|default:'' }}">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="max_units">Maximum Units:</label></td>
+            <td>
+                <input type="number" name="max_units" id="max_units" value="{{ request.GET.max_units|default:'' }}">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="min_price">Minimum Price:</label></td>
+            <td>
+                <input type="number" step="0.01" name="min_price" id="min_price" value="{{ request.GET.min_price|default:'' }}">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="max_price">Maximum Price:</label></td>
+            <td>
+                <input type="number" step="0.01" name="max_price" id="max_price" value="{{ request.GET.max_price|default:'' }}">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="prop">Props Only:</label></td>
+            <td>
+                <input type="checkbox" name="prop" id="prop" {% if request.GET.prop %}checked{% endif %}>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <button type="submit">Apply Filters</button>
+            </td>
+        </tr>
+    </table>
 </form>
 
 <!-- Results -->
-<h2>Filtered Results</h2>
-<div class="items-grid">
+<h2 class="section-header" style="background-color: var(--accent); text-shadow: rgb(255, 232, 237) .5px 0 5px;
+">Filtered Results</h2>
+<div class="card-container">
     {% for item in items %}
-        <div class="item-card rental-item">
+        <div class="card">
             <h3>{{ item.name }}</h3>
             <p>Organization: {{ item.org.name }}</p>
             {% if item.image %}

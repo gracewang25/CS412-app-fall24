@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="home-container">
-    <h1 class="text-center">Welcome to Converge!</h1>
+    <h1 class="text-center" style="text-align: center;">Welcome to Converge!</h1>
 
     <!-- About Section -->
     <section class="about">
@@ -41,6 +41,7 @@
                 <p>View and update your posted items on the <a href="{% url 'inventory' %}">Inventory</a> page.</p>
             </div>
             <div class="card">
+                <h3>Friends</h3>
                 {% if user.is_authenticated %}
                 <p>Check out other organizations' profiles and manage your friends list on the <a href="{% url 'org' request.user.org.id %}">Organization</a> page.</p>
             {% else %}
