@@ -32,12 +32,12 @@
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'org' request.user.org.id %}">My Org</a></li>
-
 
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'browse' %}">Browse</a></li>
                 <li><a href="{% url 'inventory' %}">Inventory</a></li>
+                <li><a href="{% url 'org' request.user.org.id %}">My Org</a></li>
+
                 <li>
                     <button type="button" class="collapsible" id="col-btn">More Options</button>
                     <div class="content">
